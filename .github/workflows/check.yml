@@ -34,6 +34,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |
           npm list -g --depth=0
+          npm list -g --depth=0 | grep dvcorg/cml
+          
           echo 'Hello CML!' > report.md
           
           vl2svg assets/vega-lite.json | sudo cml-publish --md >> report.md

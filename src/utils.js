@@ -17,7 +17,7 @@ const exec = async (command, opts) => {
 
 const setup_cml = async opts => {
   const { version } = opts;
-  const sudo = await exec('command -v sudo');
+  const sudo = await exec('which sudo');
 
   console.log('Uninstalling previous CML');
   await exec(

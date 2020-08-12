@@ -41,6 +41,7 @@ jobs:
           cml-publish assets/logo.png --md >> report.md
 
           vl2png assets/vega-lite.json vega-lite.png
+          cat vega-lite.png
           cml-publish vega-lite.png --md >> report.md
 
           cml-send-comment report.md

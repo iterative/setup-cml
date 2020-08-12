@@ -35,9 +35,9 @@ jobs:
         run: |
           echo 'Hello CML!' > report.md
           
-          vl2svg assets/vega-lite.json | npx cml-publish --md >> report.md
-          vl2png assets/vega-lite.json | npx cml-publish --md >> report.md
+          vl2svg assets/vega-lite.json | sudo cml-publish --md >> report.md
+          vl2png assets/vega-lite.json | sudo cml-publish --md >> report.md
 
-          npx cml-send-comment report.md
-          npx cml-send-github-check report.md
+          sudo cml-send-comment report.md
+          sudo cml-send-github-check report.md
           

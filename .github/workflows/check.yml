@@ -40,7 +40,8 @@ jobs:
           echo 'Hello CML!' > report.md
           cml-publish assets/logo.png --md >> report.md
 
-          vl2png assets/vega-lite.json | cml-publish --md >> report.md
+          vl2png assets/vega-lite.json vega-lite.png
+          cml-publish vega-lite.png --md >> report.md
 
           cml-send-comment report.md
           cml-send-github-check report.md

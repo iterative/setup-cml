@@ -28,7 +28,7 @@ const setup_cml = async opts => {
   try {
     console.log(`Installing CML version ${version}`);
 
-    const install_cmd = `npm install -g canvas vega vega-cli vega-lite @dvcorg/cml ${
+    const install_cmd = `npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
       version !== 'latest' ? `@${version}` : ''
     }`;
 

@@ -9,6 +9,9 @@ and monitoring changing datasets.
 This GitHub Action installs a library of CML functions into your GitHub Actions runner to help you write visual and text reports in pull requests. 
 
 
+![](https://github.com/iterative/cml/blob/master/imgs/cml_first_report.png)
+_A sample CML report from a machine learning project displayed in a Pull Request._
+
 ## Sample usage
 Assume that we have a machine learning script, `train.py`, that outputs an image `plot.png`.
 

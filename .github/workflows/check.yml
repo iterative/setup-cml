@@ -1,0 +1,44 @@
+name: "Check CML GitHub Action"
+
+on: [push]
+
+jobs:
+  check:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+  
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+  
+      - uses: dmpetrov/setup-cml@v1-init
+        with:
+          version: '0.1.30'
+          
+      - name: "CML specific version test"
+        run: |
+          npm view @dvcorg/cml version
+          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 2)
+          echo $CML_VER
+          if [ $CML_VER != '0.1.30' ]; then
+            exit 1
+          fi
+  
+      - uses: dmpetrov/setup-cml@v1-init
+            
+      - name: "CML unistall and install latest test"
+        run: |
+          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 2)
+          if [ $CML_VER == '0.1.30' ]; then
+            exit 1
+          fi
+  
+      - name: "CML test"
+        run: |
+          echo 'Hello CML!' > report.md
+          cml-publish assets/logo.png --md >> report.md
+          cml-send-comment report.md
+          cml-send-github-check report.md
+          

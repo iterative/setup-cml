@@ -38,9 +38,9 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |
           echo 'Hello CML!' > report.md
-          cml-publish assets/logo.png --md >> report.md
-
+          
           vl2svg assets/vega.json | cml-publish --md >> report.md
+          vl2png assets/vega.json | cml-publish --md >> report.md
 
           cml-send-comment report.md
           cml-send-github-check report.md

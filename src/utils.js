@@ -25,7 +25,7 @@ const setup_cml = async opts => {
 
   try {
     console.log(`Installing CML version ${version}`);
-    await exec('npm install -g vega vega-cli vega-lite');
+    await exec('npm install -g canvas vega vega-cli vega-lite');
     console.log(
       await exec(
         `npm i -g @dvcorg/cml${version !== 'latest' ? `@${version}` : ''}`

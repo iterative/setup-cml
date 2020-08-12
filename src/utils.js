@@ -27,6 +27,7 @@ const setup_cml = async opts => {
 
   try {
     console.log(`Installing CML version ${version}`);
+    await exec('npm config set user 0 && npm config set unsafe-perm true');
     console.log(
       await exec(
         `sudo npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${

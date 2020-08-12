@@ -30,11 +30,14 @@ jobs:
       - name: "CML unistall and install latest test"
         run: |
           CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 2)
+          echo $CML_VER
           if [ $CML_VER == '0.1.30' ]; then
             exit 1
           fi
   
       - name: "CML test"
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |
           echo 'Hello CML!' > report.md
           cml-publish assets/logo.png --md >> report.md

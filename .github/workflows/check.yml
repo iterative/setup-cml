@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '12'
   
-      - uses: dmpetrov/setup-cml@v1-init
+      - uses: iterative/setup-cml@v1-init
         with:
           version: '0.1.30'
           
@@ -26,7 +26,7 @@ jobs:
             exit 1
           fi
   
-      - uses: dmpetrov/setup-cml@v1-init
+      - uses: iterative/setup-cml@v1-init
             
       - name: "CML unistall and install latest test"
         run: |

@@ -9,10 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
   
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12'
-  
       - uses: iterative/setup-cml@v1-init
         with:
           version: '0.1.30'

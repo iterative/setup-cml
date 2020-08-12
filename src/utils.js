@@ -27,21 +27,11 @@ const setup_cml = async opts => {
 
   try {
     console.log(`Installing CML version ${version}`);
-    await exec('sudo npm install -g canvas vega vega-cli vega-lite');
-    console.log(
-      await exec(
-        `npm i -g @dvcorg/cml${version !== 'latest' ? `@${version}` : ''}`
-      )
+    await exec(
+      `sudo npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
+        version !== 'latest' ? `@${version}` : ''
+      }`
     );
-
-    /* if (process.platform === 'linux') {
-      const command = 'apt-get install -y libfontconfig-dev';
-      try {
-        await exec(`sudo ${command}`);
-      } catch (err) {
-        await exec(command);
-      }
-    } */
   } catch (err) {}
 };
 

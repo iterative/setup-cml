@@ -19,8 +19,7 @@ jobs:
           
       - name: "CML specific version test"
         run: |
-          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml )
-          echo $CML_VER
+          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
           if [ $CML_VER != '0.1.30' ]; then
             exit 1
           fi
@@ -29,8 +28,7 @@ jobs:
             
       - name: "CML unistall and install latest test"
         run: |
-          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml )
-          echo $CML_VER
+          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
           if [ $CML_VER == '0.1.30' ]; then
             exit 1
           fi

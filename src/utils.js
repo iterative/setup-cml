@@ -22,7 +22,11 @@ const setup_cml = async opts => {
     console.log('Uninstalling previous CML');
     const uninstall_cmd =
       'npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml';
-    await exec(`${uninstall_cmd}`);
+    try {
+      await exec(`${uninstall_cmd}`);
+    } catch (err) {
+      await exec(`sudo ${uninstall_cmd}`);
+    }
   } catch (err) {}
 
   try {
@@ -35,7 +39,11 @@ const setup_cml = async opts => {
     console.log(
       await exec('npm config set user 0 && npm config set unsafe-perm true')
     );
-    await exec(`${install_cmd}`);
+    try {
+      await exec(`${install_cmd}`);
+    } catch (err) {
+      await exec(`sudo ${install_cmd}`);
+    }
   } catch (err) {
     console.error(err);
   }

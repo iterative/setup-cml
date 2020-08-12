@@ -24,6 +24,7 @@ jobs:
             
       - name: "CML unistall and install latest test"
         run: |
+          npm list -g --depth=0
           CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
           if [ $CML_VER == '0.1.30' ]; then
             exit 1
@@ -35,7 +36,7 @@ jobs:
         run: |
           npm list -g --depth=0
           npm list -g --depth=0 | grep dvcorg/cml
-          
+
           echo 'Hello CML!' > report.md
           
           vl2svg assets/vega-lite.json | sudo cml-publish --md >> report.md

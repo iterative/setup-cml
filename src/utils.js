@@ -27,10 +27,12 @@ const setup_cml = async opts => {
 
   try {
     console.log(`Installing CML version ${version}`);
-    await exec(
-      `sudo npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
-        version !== 'latest' ? `@${version}` : ''
-      }`
+    console.log(
+      await exec(
+        `sudo npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
+          version !== 'latest' ? `@${version}` : ''
+        } canvas`
+      )
     );
   } catch (err) {}
 };

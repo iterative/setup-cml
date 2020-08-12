@@ -22,3 +22,5 @@ steps:
       echo 'Hello CML!' > report.md
       cml-send-comment report.md
 ```
+
+Supports `ubuntu-latest` and `macos-latest` and `container`

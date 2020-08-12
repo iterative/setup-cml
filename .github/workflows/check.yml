@@ -33,6 +33,7 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |
+          npm list -g --depth=0
           echo 'Hello CML!' > report.md
           
           vl2svg assets/vega-lite.json | sudo cml-publish --md >> report.md

@@ -1,3 +1,5 @@
+![Hero](https://user-images.githubusercontent.com/414967/90075540-f1376f00-dcfd-11ea-8cbe-f8ef6a2d1c15.png)
+
 # CML Action V1
 
 This action installs [CML](https://cml.dev/) so your workflow can access it.  

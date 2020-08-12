@@ -17,36 +17,20 @@ const exec = async (command, opts) => {
 
 const setup_cml = async opts => {
   const { version } = opts;
+  const sudo = await exec('command -v sudo');
 
-  try {
-    console.log('Uninstalling previous CML');
-    const uninstall_cmd =
-      'npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml';
-    try {
-      await exec(`${uninstall_cmd}`);
-    } catch (err) {
-      await exec(`sudo ${uninstall_cmd}`);
-    }
-  } catch (err) {}
+  console.log('Uninstalling previous CML');
+  await exec(
+    `${sudo} npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml`
+  );
 
-  try {
-    console.log(`Installing CML version ${version}`);
-
-    const install_cmd = `npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
+  console.log(`Installing CML version ${version}`);
+  await exec('npm config set user 0 && npm config set unsafe-perm true');
+  await exec(
+    `${sudo} npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
       version !== 'latest' ? `@${version}` : ''
-    }`;
-
-    console.log(
-      await exec('npm config set user 0 && npm config set unsafe-perm true')
-    );
-    try {
-      await exec(`${install_cmd}`);
-    } catch (err) {
-      await exec(`sudo ${install_cmd}`);
-    }
-  } catch (err) {
-    console.error(err);
-  }
+    }`
+  );
 };
 
 exports.exec = exec;

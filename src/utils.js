@@ -37,7 +37,9 @@ const setup_cml = async opts => {
         } canvas`
       )
     );
-  } catch (err) {}
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 exports.exec = exec;

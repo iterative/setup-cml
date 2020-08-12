@@ -34,6 +34,8 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |
+          node --version
+          npm --version
           #npm list -g --depth=0
           #npm list -g --depth=0 | grep dvcorg/cml
 
@@ -81,6 +83,8 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |
+          node --version
+          npm --version
           #npm list -g --depth=0
           #npm list -g --depth=0 | grep dvcorg/cml
 

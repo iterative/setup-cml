@@ -1,7 +1,7 @@
 ![Hero](https://user-images.githubusercontent.com/414967/90075540-f1376f00-dcfd-11ea-8cbe-f8ef6a2d1c15.png)
 
-This action installs [CML](https://cml.dev/) so your workflow can access it,
-uninstalling previous CML installations.
+This is a GitHub Action that installs [CML](https://cml.dev/) so your workflow
+can access it, uninstalling previous CML installations.
 
 # Usage
 

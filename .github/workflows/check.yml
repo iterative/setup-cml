@@ -4,7 +4,10 @@ on: [push]
 
 jobs:
   check:
-    runs-on: [ubuntu-latest]
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.runs-on }}
 
     steps:
       - uses: actions/checkout@v2

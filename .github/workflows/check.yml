@@ -44,4 +44,46 @@ jobs:
 
           cml-send-comment report.md
           cml-send-github-check report.md
+    
+  check-container:
+    runs-on: [ubuntu-latest]
+    container: ubuntu:18.04
+
+    steps:
+      - uses: actions/checkout@v2
+  
+      - uses: iterative/setup-cml@v1-init
+        with:
+          version: '0.1.30'
           
+      - name: "CML specific version test"
+        run: |
+          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
+          if [ $CML_VER != '0.1.30' ]; then
+            exit 1
+          fi
+  
+      - uses: iterative/setup-cml@v1-init
+            
+      - name: "CML unistall and install latest test"
+        run: |
+          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
+          echo $CML_VER
+          if [ $CML_VER == '0.1.30' ]; then
+            exit 1
+          fi
+  
+      - name: "CML test"
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }} 
+        run: |
+          #npm list -g --depth=0
+          #npm list -g --depth=0 | grep dvcorg/cml
+
+          echo 'Hello CML!' > report.md
+          
+          vl2svg assets/vega-lite.json | cml-publish --md >> report.md
+          vl2png assets/vega-lite.json | cml-publish --md >> report.md
+
+          cml-send-comment report.md
+          cml-send-github-check report.md

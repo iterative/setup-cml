@@ -9,8 +9,9 @@ jobs:
       matrix:
         runs-on: [ '{"runs-on": "ubuntu-latest"}', 
           '{"runs-on": "macos-latest"}', 
-          '{"runs-on": "ubuntu-latest", "container": "ubuntu:18.04"}' ]
-          
+          '{"runs-on": "ubuntu-latest", "container": "ubuntu:18.04"}', 
+          '{"runs-on": "windows-latest"}']
+
     runs-on: ${{ fromJSON(matrix.runs-on).runs-on }}
     container: ${{ fromJSON(matrix.runs-on).container }} 
 
@@ -18,7 +19,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: actions/setup-node@v1
-        if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04'"
+        if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04' 
+          || contains(fromJSON(matrix.runs-on).runs-on, 'windows')"
         with:
           node-version: '12'
     
@@ -27,6 +29,7 @@ jobs:
           version: '0.1.30'
           
       - name: "CML specific version test"
+        if: "!contains(fromJSON(matrix.runs-on).runs-on, 'windows')"
         run: |
           CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
           if [ $CML_VER != '0.1.30' ]; then
@@ -36,6 +39,7 @@ jobs:
       - uses: iterative/setup-cml@v1-init
             
       - name: "CML unistall and install latest test"
+        if: "!contains(fromJSON(matrix.runs-on).runs-on, 'windows')"
         run: |
           CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
           echo $CML_VER
@@ -44,6 +48,7 @@ jobs:
           fi
   
       - name: "CML test"
+        if: "!contains(fromJSON(matrix.runs-on).runs-on, 'windows')"
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }} 
         run: |

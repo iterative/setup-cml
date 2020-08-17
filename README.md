@@ -1,6 +1,6 @@
 # Setup CML Action V1
 
-![CML](https://user-images.githubusercontent.com/414967/90075540-f1376f00-dcfd-11ea-8cbe-f8ef6a2d1c15.png)
+![CML](https://user-images.githubusercontent.com/414967/90448663-1ce39c00-e0e6-11ea-8083-710825d2e94e.png)
 
 Continuous Machine Learning ([CML](https://cml.dev/)) is an open-source library
 for implementing continuous integration & delivery (CI/CD) in machine learning

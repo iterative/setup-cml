@@ -21,7 +21,7 @@ graphs and checks.
 
 ## Usage
 
-This action can be run on `ubuntu-latest`, `macos-latest` and `container`.
+This action can be run on `ubuntu-latest`, `macos-latest`.
 
 Basic:
 

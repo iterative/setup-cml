@@ -7,57 +7,21 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       matrix:
-        runs-on: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.runs-on }}
+        runs-on: [ '{"runs-on": "ubuntu-latest"}', 
+          '{"runs-on": "macos-latest"}', 
+          '{"runs-on": "ubuntu-latest", "container": "ubuntu:18.04"}' ]
+          
+    runs-on: ${{ fromJSON(matrix.runs-on).runs-on }}
+    container: ${{ fromJSON(matrix.runs-on).container }} 
 
     steps:
       - uses: actions/checkout@v2
-  
-      - uses: iterative/setup-cml@v1-init
-        with:
-          version: '0.1.30'
-          
-      - name: "CML specific version test"
-        run: |
-          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
-          if [ $CML_VER != '0.1.30' ]; then
-            exit 1
-          fi
-  
-      - uses: iterative/setup-cml@v1-init
-            
-      - name: "CML unistall and install latest test"
-        run: |
-          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
-          echo $CML_VER
-          if [ $CML_VER == '0.1.30' ]; then
-            exit 1
-          fi
-  
-      - name: "CML test"
-        env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }} 
-        run: |
-          echo 'Hello CML!' > report.md
-          
-          vl2svg assets/vega-lite.json | cml-publish --md >> report.md
-          vl2png assets/vega-lite.json | cml-publish --md >> report.md
 
-          cml-send-comment report.md
-          cml-send-github-check report.md
-    
-  check-container:
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    runs-on: [ubuntu-latest]
-    container: ubuntu:18.04
-
-    steps:
-      - uses: actions/checkout@v2
-  
       - uses: actions/setup-node@v1
+        if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04'"
         with:
           node-version: '12'
-
+    
       - uses: iterative/setup-cml@v1-init
         with:
           version: '0.1.30'

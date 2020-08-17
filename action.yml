@@ -1,4 +1,4 @@
-name: 'CML (Continuous Machine Learning)'
+name: 'Setup CML (Continuous Machine Learning)'
 description: 'Sets up CML (Continuous Machine Learning) in your GitHub Actions workflow.'
 author: 'Iterative, Inc.'
 inputs:

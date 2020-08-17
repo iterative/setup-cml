@@ -1,4 +1,4 @@
-# Setup CML Action V1
+# Setup CML Action
 
 ![CML](https://user-images.githubusercontent.com/414967/90448663-1ce39c00-e0e6-11ea-8083-710825d2e94e.png)
 

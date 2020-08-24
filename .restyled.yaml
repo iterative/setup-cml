@@ -1,0 +1,7 @@
+restylers:
+  - name: prettier
+    arguments: ['--write']
+    include:
+      - './*.{js,md}'
+      - './**/*.md'
+      - 'src/**/*.js'

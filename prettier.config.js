@@ -1,5 +1,4 @@
 module.exports = {
-  semi: false,
   arrowParens: 'avoid',
   singleQuote: true,
   trailingComma: 'none',
@@ -7,4 +6,4 @@ module.exports = {
   tabWidth: 2,
   useTabs: false,
   proseWrap: 'always'
-}
+};

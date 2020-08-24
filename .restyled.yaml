@@ -4,4 +4,5 @@ restylers:
     include:
       - 'src/**/*.js'
       - 'bin/**/*.js'
+      - 'assets/*.json'
       - './**/*.{yaml,yml,md,json}'

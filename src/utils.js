@@ -2,7 +2,7 @@ const util = require('util');
 
 const execp = util.promisify(require('child_process').exec);
 const exec = async (command, opts) => {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function(resolve, reject) {
     const { debug } = opts || {};
 
     execp(command, (error, stdout, stderr) => {
@@ -23,14 +23,12 @@ const setup_cml = async opts => {
   } catch (err) {}
 
   console.log('Uninstalling previous CML');
-  await exec(
-    `${sudo} npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml`
-  );
+  await exec(`${sudo} npm uninstall -g @dvcorg/cml`);
 
   console.log(`Installing CML version ${version}`);
   await exec('npm config set user 0');
   await exec(
-    `${sudo} npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
+    `${sudo} npm install -g @dvcorg/cml${
       version !== 'latest' ? `@${version}` : ''
     }`
   );

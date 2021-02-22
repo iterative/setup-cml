@@ -19,8 +19,10 @@ jobs:
       - name: "git"
         if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04'"
         run: |
+          apt update -y
+          apt install software-properties-common -y 
+          add-apt-repository ppa:git-core/ppa
           apt -y update && apt install -y git
-          git config --get remote.origin.url
 
       - uses: actions/checkout@v2
 

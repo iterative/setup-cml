@@ -15,9 +15,8 @@ parameter.
 
 The main difference between this and the CML container is that the latest can
 work also as a self-hosted runner with GPU capabilites and a cloud provisioner.
-Additionally comes packed with [DVC](https://dvc.org). As said this action only
-installs the [functions](#CML-functions) available in CML to generate comments,
-graphs and checks.
+As said this action only installs the [functions](#CML-functions) available in
+CML to generate comments, graphs and checks.
 
 ## Usage
 
@@ -87,9 +86,10 @@ report. Below is a list of functions for writing markdown reports and delivering
 those reports to your Pull Request as a comment.
 [Read the docs](https://github.com/iterative/cml#readme).
 
-| Function                | Description                                                 | Inputs                                                    |
-| ----------------------- | ----------------------------------------------------------- | --------------------------------------------------------- |
-| `cml-send-comment`      | Return CML report as a comment in your GitHub pull request. | `<path to report> --head-sha <sha>`                       |
-| `cml-send-github-check` | Return CML report as a check in GitHub                      | `<path to report> --head-sha <sha>`                       |
-| `cml-publish`           | Publish an image for writing to CML report.                 | `<path to image> --title <image title> --md`              |
-| `cml-tensorboard-dev`   | Return a link to a Tensorboard.dev page                     | `--logdir <path to logs> --title <experiment title> --md` |
+| Function                | Description                                                 | Inputs                                                                                                                  |
+| ----------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `cml-send-comment`      | Return CML report as a comment in your GitHub pull request. | `<path to report> --head-sha <sha>`                                                                                     |
+| `cml-send-github-check` | Return CML report as a check in GitHub                      | `<path to report> --head-sha <sha>`                                                                                     |
+| `cml-publish`           | Publish an image for writing to CML report.                 | `<path to image> --title <image title> --md`                                                                            |
+| `cml-tensorboard-dev`   | Return a link to a Tensorboard.dev page                     | `--logdir <path to logs> --title <experiment title> --md`                                                               |
+| `cml-runner`            | Starts a runner locally or in cloud providers               | [check pre-release docs](https://github.com/iterative/cml/tree/docs-refresh-runner#Allocating-cloud-resources-with-CML) |

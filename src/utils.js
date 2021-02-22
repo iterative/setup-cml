@@ -39,6 +39,7 @@ const setup_cml = async opts => {
         );
       }
     } catch (err) {
+      console.log(err);
       throw new Error(
         'Git is not available and was not able to be installed either. This only works for debian distros'
       );

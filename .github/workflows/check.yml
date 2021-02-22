@@ -42,6 +42,9 @@ jobs:
           fi
   
       - uses: iterative/setup-cml@v1
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
             
       - name: "CML unistall and install latest test"
         if: "!contains(fromJSON(matrix.runs-on).runs-on, 'windows')"

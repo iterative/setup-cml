@@ -22,6 +22,23 @@ const setup_cml = async opts => {
     sudo = await exec('which sudo');
   } catch (err) {}
 
+  if (platform === 'linux') {
+    let git = true;
+    try {
+      await exec('git');
+    } catch (err) {
+      git = false;
+    }
+
+    try {
+      if (!git) {
+        await exec('apt update -y && apt install git -y');
+      }
+    } catch (err) {
+      throw new Error('Git is not available and was not able to be installed either. This only works for debian distros');
+    }
+  }
+
   console.log('Uninstalling previous CML');
   await exec(
     `${sudo} npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml`

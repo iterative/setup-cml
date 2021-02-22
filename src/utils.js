@@ -2,7 +2,7 @@ const util = require('util');
 
 const execp = util.promisify(require('child_process').exec);
 const exec = async (command, opts) => {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function(resolve, reject) {
     const { debug } = opts || {};
 
     execp(command, (error, stdout, stderr) => {
@@ -16,6 +16,8 @@ const exec = async (command, opts) => {
 };
 
 const setup_cml = async opts => {
+  const { platform } = process;
+
   const { version } = opts;
   let sudo = '';
   try {
@@ -32,10 +34,14 @@ const setup_cml = async opts => {
 
     try {
       if (!git) {
-        await exec(`${sudo} add-apt-repository ppa:git-core/ppa && ${sudo} apt update -y && ${sudo} apt install git -y`);
+        await exec(
+          `${sudo} add-apt-repository ppa:git-core/ppa && ${sudo} apt update -y && ${sudo} apt install git -y`
+        );
       }
     } catch (err) {
-      throw new Error('Git is not available and was not able to be installed either. This only works for debian distros');
+      throw new Error(
+        'Git is not available and was not able to be installed either. This only works for debian distros'
+      );
     }
   }
 

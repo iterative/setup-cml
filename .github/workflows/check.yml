@@ -22,6 +22,7 @@ jobs:
         if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04'"
         run: |
           apt -y update && apt install -y git
+          git --version
           git config --get remote.origin.url
 
       - uses: actions/setup-node@v1

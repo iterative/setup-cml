@@ -32,7 +32,7 @@ const setup_cml = async opts => {
 
     try {
       if (!git) {
-        await exec('apt update -y && apt install git -y');
+        await exec(`${sudo} add-apt-repository ppa:git-core/ppa && ${sudo} apt update -y && ${sudo} apt install git -y`);
       }
     } catch (err) {
       throw new Error('Git is not available and was not able to be installed either. This only works for debian distros');

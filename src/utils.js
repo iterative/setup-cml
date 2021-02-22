@@ -35,7 +35,7 @@ const setup_cml = async opts => {
     try {
       if (!git) {
         await exec(
-          `${sudo} add-apt-repository ppa:git-core/ppa && ${sudo} apt update -y && ${sudo} apt install git -y`
+          `${sudo} apt install software-properties-common && ${sudo} add-apt-repository ppa:git-core/ppa && ${sudo} apt update -y && ${sudo} apt install git -y`
         );
       }
     } catch (err) {

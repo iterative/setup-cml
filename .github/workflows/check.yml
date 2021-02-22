@@ -23,6 +23,7 @@ jobs:
         run: |
           apt -y update && apt install -y git
           git --version
+          git remote -v
           git config --get remote.origin.url
 
       - uses: actions/setup-node@v1

@@ -18,6 +18,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: "git"
+        if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04'"
+        run: |
+          apt -y update && apt install -y git
+          git config --get remote.origin.url
+
       - uses: actions/setup-node@v1
         if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04' 
           || contains(fromJSON(matrix.runs-on).runs-on, 'windows')"

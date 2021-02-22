@@ -23,6 +23,11 @@ jobs:
           || contains(fromJSON(matrix.runs-on).runs-on, 'windows')"
         with:
           node-version: '12'
+
+      - name: "git"
+        if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04'"
+        run: |
+          apt -y update && apt install -y git
     
       - uses: iterative/setup-cml@v1
         with:

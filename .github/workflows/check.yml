@@ -16,15 +16,13 @@ jobs:
     container: ${{ fromJSON(matrix.runs-on).container }} 
 
     steps:
-      - uses: actions/checkout@v2
-
       - name: "git"
         if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04'"
         run: |
           apt -y update && apt install -y git
-          git --version
-          git remote -v
           git config --get remote.origin.url
+
+      - uses: actions/checkout@v2
 
       - uses: actions/setup-node@v1
         if: "fromJSON(matrix.runs-on).container == 'ubuntu:18.04' 

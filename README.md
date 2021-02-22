@@ -15,8 +15,7 @@ parameter.
 
 The main difference between this and the CML container is that the latest can
 work also as a self-hosted runner with GPU capabilites and a cloud provisioner.
-Additionally comes packed with [DVC](https://dvc.org). As said this action only
-installs the [functions](#CML-functions) available in CML to generate comments,
+As said this action only installs the [functions](#CML-functions) available in CML to generate comments,
 graphs and checks.
 
 ## Usage

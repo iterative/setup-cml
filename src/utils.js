@@ -22,6 +22,8 @@ const setup_cml = async opts => {
     sudo = await exec('which sudo');
   } catch (err) {}
 
+  await exec(`${sudo} npm config set user 0`);
+
   console.log('Uninstalling previous CML');
   await exec(
     `${sudo} npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml`

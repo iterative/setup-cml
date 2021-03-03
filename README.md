@@ -9,16 +9,21 @@ training and evaluation, comparing ML experiments across your project history,
 and monitoring changing datasets.
 
 The [iterative/setup-cml](https://github.com/iterative/setup-cml) action is a
-JavaScript workflow that provides [CML](https://cml.dev/) functions in your GitHub
-Actions workflow. The action allows users to install CML without using the CML Docker container.
+JavaScript workflow that provides [CML](https://cml.dev/) functions in your
+GitHub Actions workflow. The action allows users to install CML without using
+the CML Docker container.
 
 This action gives you:
-- Functions like `cml-publish` and `cml-send-comment` for publishing data visualization and metrics from your CI workflow as comments in a pull request.
-- `cml-runner`, a function that enables workflows to provision cloud and on-premise computing resources for training models
-- The freedom 🦅 to mix and match CML with your favorite data science tools and environments 
 
+- Functions like `cml-publish` and `cml-send-comment` for publishing data
+  visualization and metrics from your CI workflow as comments in a pull request.
+- `cml-runner`, a function that enables workflows to provision cloud and
+  on-premise computing resources for training models
+- The freedom 🦅 to mix and match CML with your favorite data science tools and
+  environments
 
-Note that CML does not include DVC and its dependencies- for that, you want the [Setup DVC Action](https://github.com/iterative/setup-dvc).
+Note that CML does not include DVC and its dependencies- for that, you want the
+[Setup DVC Action](https://github.com/iterative/setup-dvc).
 
 ## Usage
 
@@ -88,10 +93,10 @@ report. Below is a list of functions for writing markdown reports and delivering
 those reports to your Pull Request as a comment.
 [Read the docs](https://github.com/iterative/cml#readme).
 
-| Function                | Description                                                 | Inputs                                                                                                                  |
-| ----------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `cml-send-comment`      | Return CML report as a comment in your GitHub pull request. | `<path to report> --head-sha <sha>`                                                                                     |
-| `cml-send-github-check` | Return CML report as a check in GitHub                      | `<path to report> --head-sha <sha>`                                                                                     |
-| `cml-publish`           | Publish an image for writing to CML report.                 | `<path to image> --title <image title> --md`                                                                            |
-| `cml-tensorboard-dev`   | Return a link to a Tensorboard.dev page                     | `--logdir <path to logs> --title <experiment title> --md`                                                               |
-| `cml-runner`            | Starts a runner locally or in cloud providers               | [check pre-release docs](https://github.com/iterative/cml/tree/docs-refresh-runner#Allocating-cloud-resources-with-CML) |
+| Function                | Description                                                 | Inputs                                                    |
+| ----------------------- | ----------------------------------------------------------- | --------------------------------------------------------- |
+| `cml-send-comment`      | Return CML report as a comment in your GitHub pull request. | `<path to report> --head-sha <sha>`                       |
+| `cml-send-github-check` | Return CML report as a check in GitHub                      | `<path to report> --head-sha <sha>`                       |
+| `cml-publish`           | Publish an image for writing to CML report.                 | `<path to image> --title <image title> --md`              |
+| `cml-tensorboard-dev`   | Return a link to a Tensorboard.dev page                     | `--logdir <path to logs> --title <experiment title> --md` |
+| `cml-runner`            | Starts a runner locally or in cloud providers               | [check docs](https://github.com/iterative/cml)            |

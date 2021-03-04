@@ -35,7 +35,7 @@ Basic usage:
 steps:
   - uses: actions/checkout@v2
 
-  - uses: iterative/cml-action@v1
+  - uses: iterative/setup-cml@v1
 ```
 
 A specific version can be pinned to your workflow.

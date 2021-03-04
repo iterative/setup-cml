@@ -9,16 +9,21 @@ training and evaluation, comparing ML experiments across your project history,
 and monitoring changing datasets.
 
 The [iterative/setup-cml](https://github.com/iterative/setup-cml) action is a
-JavaScript workflow that provides [CML](https://cml.dev/) functions in your GitHub
-Actions workflow. The action allows users to install CML without using the CML Docker container.
+JavaScript workflow that provides [CML](https://cml.dev/) functions in your
+GitHub Actions workflow. The action allows users to install CML without using
+the CML Docker container.
 
 This action gives you:
-- Functions like `cml-publish` and `cml-send-comment` for publishing data visualization and metrics from your CI workflow as comments in a pull request.
-- `cml-runner`, a function that enables workflows to provision cloud and on-premise computing resources for training models
-- The freedom 🦅 to mix and match CML with your favorite data science tools and environments 
 
+- Functions like `cml-publish` and `cml-send-comment` for publishing data
+  visualization and metrics from your CI workflow as comments in a pull request.
+- `cml-runner`, a function that enables workflows to provision cloud and
+  on-premise computing resources for training models
+- The freedom 🦅 to mix and match CML with your favorite data science tools and
+  environments
 
-Note that CML does not include DVC and its dependencies- for that, you want the [Setup DVC Action](https://github.com/iterative/setup-dvc).
+Note that CML does not include DVC and its dependencies- for that, you want the
+[Setup DVC Action](https://github.com/iterative/setup-dvc).
 
 ## Usage
 
@@ -30,7 +35,7 @@ Basic usage:
 steps:
   - uses: actions/checkout@v2
 
-  - uses: iterative/cml-action@v1
+  - uses: iterative/setup-cml@v1
 ```
 
 A specific version can be pinned to your workflow.

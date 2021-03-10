@@ -57,7 +57,7 @@ jobs:
   
       - name: "Install fontconfig"
         if: "contains(fromJSON(matrix.runs-on).container, 'ubuntu:18.04')"
-        run: apt install fontconfig
+        run: apt install --yes fontconfig
           
       - name: "CML test"
         if: "!contains(fromJSON(matrix.runs-on).runs-on, 'windows')"

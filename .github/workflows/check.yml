@@ -2,61 +2,64 @@ name: Check CML GitHub Action
 on: [push]
 jobs:
   check:
+    defaults:
+      run:
+        shell: bash
     strategy:
       matrix:
-        os:
-          [
-            '{"runs-on": "ubuntu-latest"}',
-            '{"runs-on": "macos-latest"}',
-            '{"runs-on": "ubuntu-latest", "container": "ubuntu:18.04"}',
-            '{"runs-on": "windows-latest"}',
-          ]
-    runs-on: ${{ fromJSON(matrix.os).runs-on }}
-    container: ${{ fromJSON(matrix.os).container }}
+        system:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        include:
+          - system: ubuntu-18.04
+            container: ubuntu:18.04
+    runs-on: ${{ matrix.system }}
+    container: ${{ matrix.container }}
     steps:
+      - uses: actions/checkout@v2
       - name: install git
-        if: "fromJSON(matrix.os).container == 'ubuntu:18.04'"
+        if: matrix.container == 'ubuntu:18.04'
         run: |
           apt update -y
           apt install software-properties-common -y
           add-apt-repository ppa:git-core/ppa
           apt -y update && apt install -y git
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         if:
-          "fromJSON(matrix.os).container == 'ubuntu:18.04' ||
-          contains(fromJSON(matrix.os).runs-on, 'windows')"
+          matrix.container == 'ubuntu:18.04' || matrix.system ==
+          'windows-latest'
         with:
           node-version: '12'
-      - uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test
       - name: local action with '0.1.30'
-        uses: ./.github/..
+        uses: ./
         with:
           version: '0.1.30'
       - name: test CML specific version
-        if: "!contains(fromJSON(matrix.os).runs-on, 'windows')"
         run: |
           CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
           if [ $CML_VER != '0.1.30' ]; then
             exit 1
           fi
       - name: local action with defaults
-        uses: ./.github/..
+        uses: ./
       - name: test CML latest version
-        if: "!contains(fromJSON(matrix.os).runs-on, 'windows')"
         run: |
           CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
           echo $CML_VER
           if [ $CML_VER == '0.1.30' ]; then
             exit 1
           fi
-      - if: "contains(fromJSON(matrix.os).container, 'ubuntu:18.04')"
+      - if: matrix.container == 'ubuntu:18.04'
         run: apt install --yes fontconfig
       - name: test CML
-        if: "!contains(fromJSON(matrix.os).runs-on, 'windows')"
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo 'Hello CML!' > report.md
+          echo 'Hello CML from ${{ matrix.system }}!' > report.md
 
           vl2svg assets/vega-lite.json | cml-publish --md >> report.md
           vl2png assets/vega-lite.json | cml-publish --md >> report.md

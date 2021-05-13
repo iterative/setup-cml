@@ -15,7 +15,7 @@ const exec = async (command, opts) => {
   });
 };
 
-const setup_cml = async opts => {
+const setupCML = async opts => {
   const { version } = opts;
   let sudo = '';
   try {
@@ -39,4 +39,4 @@ const setup_cml = async opts => {
 };
 
 exports.exec = exec;
-exports.setup_cml = setup_cml;
+exports.setupCML = setupCML;

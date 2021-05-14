@@ -39,6 +39,7 @@ jobs:
         with:
           version: '0.3.0'
       - name: test CML specific version
+        if: matrix.system != 'windows-latest'
         run: |
           CML_VER="$(cml-publish --version 2>&1)"
           if [ "$CML_VER" != '0.3.0' ]; then
@@ -47,6 +48,7 @@ jobs:
       - name: local action with defaults
         uses: ./
       - name: test CML latest version
+        if: matrix.system != 'windows-latest'
         run: |
           CML_VER="$(cml-publish --version 2>&1)"
           if [ "$CML_VER" == '0.3.0' ]; then

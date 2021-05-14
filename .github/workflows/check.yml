@@ -34,23 +34,22 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test
-      - name: local action with '0.1.30'
+      - name: local action with '0.3.0'
         uses: ./
         with:
-          version: '0.1.30'
+          version: '0.3.0'
       - name: test CML specific version
         run: |
-          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
-          if [ $CML_VER != '0.1.30' ]; then
+          CML_VER="$(cml-publish --version 2>&1)"
+          if [ "$CML_VER" != '0.3.0' ]; then
             exit 1
           fi
       - name: local action with defaults
         uses: ./
       - name: test CML latest version
         run: |
-          CML_VER=$(npm list -g --depth=0 | grep dvcorg/cml | cut -d'@' -f 3)
-          echo $CML_VER
-          if [ $CML_VER == '0.1.30' ]; then
+          CML_VER="$(cml-publish --version 2>&1)"
+          if [ "$CML_VER" == '0.3.0' ]; then
             exit 1
           fi
       - if: matrix.container == 'ubuntu:18.04'

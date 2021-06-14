@@ -17,14 +17,15 @@ jobs:
     runs-on: ${{ matrix.system }}
     container: ${{ matrix.container }}
     steps:
-      - uses: actions/checkout@v2
-      - name: install git
+      - name: install deps
         if: matrix.container == 'ubuntu:18.04'
         run: |
           apt update -y
-          apt install software-properties-common -y
+          apt install -y software-properties-common
           add-apt-repository ppa:git-core/ppa
-          apt -y update && apt install -y git
+          apt update -y
+          apt install -y git fontconfig make gcc pkg-config
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         if:
           matrix.container == 'ubuntu:18.04' || matrix.system ==
@@ -54,8 +55,6 @@ jobs:
           if [ "$CML_VER" == '0.3.0' ]; then
             exit 1
           fi
-      - if: matrix.container == 'ubuntu:18.04'
-        run: apt install --yes fontconfig
       - name: test CML
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}

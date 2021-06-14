@@ -20,10 +20,10 @@ jobs:
       - name: install deps
         if: matrix.container == 'ubuntu:18.04'
         run: |
-          apt update -y
+          apt update
           apt install -y software-properties-common
           add-apt-repository ppa:git-core/ppa
-          apt update -y
+          apt update
           apt install -y git fontconfig make gcc pkg-config
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2

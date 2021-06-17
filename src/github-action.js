@@ -1,10 +1,10 @@
 const core = require('@actions/core');
-const { setup_cml } = require('./utils');
+const { setupCml } = require('./utils');
 
 (async () => {
   try {
     const version = core.getInput('version');
-    await setup_cml({ version });
+    await setupCml({ version });
   } catch (error) {
     core.setFailed(error.message);
   }

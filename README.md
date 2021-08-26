@@ -52,6 +52,7 @@ steps:
 Self-Hosted example:
 
 ```yaml
+runs-on: [self-hosted]
 steps:
   - uses: actions/setup-node@v2
     with:

@@ -49,7 +49,7 @@ steps:
       version: '3.0.0'
 ```
 
-Self-Hosted example:
+Self-hosted example:
 
 ```yaml
 runs-on: [self-hosted]

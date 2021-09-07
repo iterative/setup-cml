@@ -1,10 +1,14 @@
-name: Check CML GitHub Action
+name: Test & Release
 on:
+  release:
+    types:
+      - published
+      - edited
   schedule:
     - cron: 0 0 * * *
   pull_request:
 jobs:
-  check:
+  test:
     defaults:
       run:
         shell: bash
@@ -69,3 +73,14 @@ jobs:
 
           cml-send-comment report.md
           cml-send-github-check report.md
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    steps:
+      - name: tag action release
+        uses: Actions-R-Us/actions-tagger@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          publish_latest_tag: true

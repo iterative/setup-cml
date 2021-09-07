@@ -49,6 +49,20 @@ steps:
       version: '3.0.0'
 ```
 
+Self-hosted example:
+
+```yaml
+runs-on: [self-hosted]
+steps:
+  - uses: actions/setup-node@v2
+    with:
+      node-version: '12'
+  - uses: actions/checkout@v2
+  - uses: iterative/setup-cml@v1
+    with:
+      sudo: false
+```
+
 ## Inputs
 
 The following inputs are supported.

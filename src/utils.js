@@ -16,23 +16,25 @@ const exec = async (command, opts) => {
 };
 
 const setupCml = async opts => {
-  const { version } = opts;
-  let sudo = '';
-  try {
-    sudo = await exec('which sudo');
-  } catch (err) {}
+  const { version, sudo = true } = opts;
+  let sudoPath = '';
+  if (sudo) {
+    try {
+      sudoPath = await exec('which sudo');
+    } catch (err) {}
+  }
 
-  await exec(`${sudo} npm config set user 0`);
+  await exec(`${sudoPath} npm config set user 0`);
 
   console.log('Uninstalling previous CML');
   await exec(
-    `${sudo} npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml`
+    `${sudoPath} npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml`
   );
 
   console.log(`Installing CML version ${version}`);
   await exec('npm config set user 0');
   await exec(
-    `${sudo} npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
+    `${sudoPath} npm install -g canvas vega vega-cli vega-lite @dvcorg/cml${
       version !== 'latest' ? `@${version}` : ''
     }`
   );

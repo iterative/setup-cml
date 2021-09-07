@@ -6,6 +6,10 @@ inputs:
     description: The version of CML to install (e.g. '3.0.0').
     default: latest
     required: false
+  sudo:
+    description: A flag to disable the use of sudo whilst installing CML.
+    default: true
+    required: false
 runs:
   using: node12
   main: dist/index.js

@@ -25,6 +25,9 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
+  "engines": {
+    "node": "<=15.x"
+  },
   "main": "dist/index.js",
   "scripts": {
     "lintfix": "eslint --fix ./",

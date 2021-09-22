@@ -40,7 +40,7 @@ const setupCml = async opts => {
   );
   console.log(
     `Targeted CML version: ${version}, received:`,
-    await exec('cml --version')
+    await exec('npm view @dvcorg/cml version')
   );
 };
 

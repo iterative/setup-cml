@@ -38,10 +38,15 @@ const setupCml = async opts => {
       version !== 'latest' ? `@${version}` : ''
     }`
   );
-  console.log(
-    `Targeted CML version: ${version}, received:`,
-    await exec('npm view @dvcorg/cml version')
-  );
+
+  let installedVersion = '';
+  try {
+    const json = await exec('npm list --json --global @dvcorg/cml');
+    installedVersion = JSON.parse(json).dependencies['@dvcorg/cml'].version;
+    console.log(
+      `Targeted CML version: ${version}, received: ${installedVersion}`
+    );
+  } catch (err) {}
 };
 
 exports.exec = exec;

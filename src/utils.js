@@ -22,7 +22,7 @@ const setupCml = async opts => {
     try {
       sudoPath = await exec('which sudo');
     } catch (err) {
-      console.log('Failed find the sudo binary.', err);
+      console.log('Failed to find the sudo binary.', err);
       process.exit(1);
     }
   }

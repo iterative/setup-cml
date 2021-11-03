@@ -5,7 +5,8 @@ const { setupCml } = require('./utils');
   try {
     const version = core.getInput('version');
     const sudo = core.getBooleanInput('sudo');
-    await setupCml({ version, sudo });
+    const override = core.getInput('override');
+    await setupCml({ version, sudo, override });
   } catch (error) {
     core.setFailed(error.message);
   }

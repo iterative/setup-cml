@@ -10,6 +10,12 @@ inputs:
     description: A flag to disable the use of sudo whilst installing CML.
     default: true
     required: false
+  override:
+    description:
+      Override cml install with a git url (e.g. 'npm install
+      git://github.com:iterative/cml.git#6a387a23650f20fd5eb81bc0f63a9bfc6f98882e')
+    required: false
+
 runs:
   using: node12
   main: dist/index.js

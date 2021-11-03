@@ -48,7 +48,9 @@ const setupCml = async opts => {
     const json = await exec('npm list --json --global @dvcorg/cml');
     installedVersion = JSON.parse(json).dependencies['@dvcorg/cml'].version;
     console.log(
-      `Targeted CML version: ${version}, received: ${installedVersion}`
+      `Targeted CML version: ${version}, received: ${installedVersion} ${
+        orFlag ? `but from overide at: ${override}` : ''
+      }`
     );
   } catch (err) {
     console.log('Failed to parse the install version of CML.', err);

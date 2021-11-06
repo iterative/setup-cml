@@ -45,7 +45,7 @@ const setupCml = async opts => {
 
   let installedVersion = '';
   try {
-    const json = await exec('npm list --json --global @dvcorg/cml');
+    const json = await exec(`${sudoPath} npm list --json --global @dvcorg/cml`);
     installedVersion = JSON.parse(json).dependencies['@dvcorg/cml'].version;
     console.log(
       `Targeted CML version: ${version}, received: ${installedVersion} ${

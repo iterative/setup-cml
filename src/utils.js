@@ -17,8 +17,16 @@ const exec = async (command, opts) => {
 
 const setupCml = async opts => {
   const { version, sudo = true } = opts;
-  const orFlag = version.startsWith('');
+  const overrideRegex = /^git(?:\+(?:ssh|https))?:\/\//;
+  const orFlag = overrideRegex.test(version);
   let sudoPath = '';
+
+  if (orFlag) {
+    console.log(
+      'A custom git install has been provided for version, CML may contain undocumented/unsupported changes'
+    );
+  }
+
   if (sudo) {
     try {
       sudoPath = await exec('which sudo');

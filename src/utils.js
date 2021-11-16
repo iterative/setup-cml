@@ -18,10 +18,10 @@ const exec = async (command, opts) => {
 const setupCml = async opts => {
   const { version, sudo = true } = opts;
   const overrideRegex = /^git(?:\+(?:ssh|https))?:\/\//;
-  const orFlag = overrideRegex.test(version);
+  const versionUrl = overrideRegex.test(version);
   let sudoPath = '';
 
-  if (orFlag) {
+  if (versionUrl) {
     console.log(
       'A custom git install has been provided for version, CML may contain undocumented/unsupported changes'
     );
@@ -37,7 +37,7 @@ const setupCml = async opts => {
   console.log('Uninstalling previous CML');
   await exec(
     `${sudoPath} npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml ${
-      orFlag ? version : ''
+      versionUrl ? version : ''
     }`
   );
 
@@ -45,7 +45,7 @@ const setupCml = async opts => {
   await exec('npm config set user 0');
   await exec(
     `${sudoPath} npm install -g canvas@2 vega@5 vega-cli@5 vega-lite@4 ${
-      orFlag
+      versionUrl
         ? version
         : `@dvcorg/cml${version !== 'latest' ? `@${version}` : ''}`
     }`
@@ -57,7 +57,7 @@ const setupCml = async opts => {
     installedVersion = JSON.parse(json).dependencies['@dvcorg/cml'].version;
     console.log(
       `Targeted CML version: ${version}, received: ${installedVersion} ${
-        orFlag
+        versionUrl
           ? `but from git source, this version could no longer be supported.`
           : ''
       }`

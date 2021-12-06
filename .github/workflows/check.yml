@@ -38,15 +38,14 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test
-      - name: local action with '0.3.0'
+      - name: local action with '0.8.0'
         uses: ./
         with:
-          version: '0.3.0'
+          version: '0.8.0'
       - name: test CML specific version
         if: matrix.system != 'windows-latest'
         run: |
-          CML_VER="$(cml-publish --version 2>&1)"
-          if [ "$CML_VER" != '0.3.0' ]; then
+          if [ "$(cml --version 2>&1)" != '0.8.0' ]; then
             exit 1
           fi
       - name: local action with defaults
@@ -54,8 +53,7 @@ jobs:
       - name: test CML latest version
         if: matrix.system != 'windows-latest'
         run: |
-          CML_VER="$(cml-publish --version 2>&1)"
-          if [ "$CML_VER" == '0.3.0' ]; then
+          if [ "$(cml --version 2>&1)" == '0.8.0' ]; then
             exit 1
           fi
       - name: test CML

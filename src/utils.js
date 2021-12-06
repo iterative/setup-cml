@@ -22,6 +22,9 @@ const setupCml = async opts => {
     try {
       sudoPath = await exec('which sudo');
     } catch (err) {}
+    if (sudoPath) {
+      sudoPath += ' env "PATH=$PATH"';
+    }
   }
 
   await exec(`${sudoPath} npm config set user 0`);

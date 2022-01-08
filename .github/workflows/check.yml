@@ -1,38 +1,13 @@
-name: Check CML GitHub Action
-on:
-  schedule:
-    - cron: 0 0 * * *
-  pull_request:
+on: push
 jobs:
   check:
     defaults:
       run:
         shell: bash
-    strategy:
-      matrix:
-        system:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
-        include:
-          - system: ubuntu-18.04
-            container: ubuntu:18.04
-    runs-on: ${{ matrix.system }}
-    container: ${{ matrix.container }}
+    runs-on: windows-latest
     steps:
-      - name: install deps
-        if: matrix.container == 'ubuntu:18.04'
-        run: |
-          apt update
-          apt install -y software-properties-common
-          add-apt-repository ppa:git-core/ppa
-          apt update
-          apt install -y git fontconfig make gcc pkg-config
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-        if:
-          matrix.container == 'ubuntu:18.04' || matrix.system ==
-          'windows-latest'
         with:
           node-version: '12'
       - run: npm ci

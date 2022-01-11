@@ -3,11 +3,6 @@ jobs:
   check:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - run: npm ci
-      - uses: ./
       - uses: mxschmitt/action-tmate@v3
         with:
           limit-access-to-actor: true
-      - run: vl2png assets/vega-lite.json | cml publish

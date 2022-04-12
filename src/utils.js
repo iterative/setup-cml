@@ -30,14 +30,12 @@ const setupCml = async opts => {
   await exec(`${sudoPath} npm config set user 0`);
 
   console.log('Uninstalling previous CML');
-  await exec(
-    `${sudoPath} npm uninstall -gf @dvcorg/cml`
-  );
+  await exec(`${sudoPath} npm uninstall -gf @dvcorg/cml`);
 
   console.log(`Installing CML version ${version}`);
   await exec('npm config set user 0');
   await exec(
-    `${sudoPath} npm install -fg canvas@2 vega@5 vega-cli@5 vega-lite@4 @dvcorg/cml${
+    `${sudoPath} npm install -f canvas@2 vega@5 vega-cli@5 vega-lite@4 @dvcorg/cml${
       version !== 'latest' ? `@${version}` : ''
     }`
   );

@@ -47,7 +47,7 @@ const setupCml = async opts => {
   console.log(`Installing CML version ${version}`);
   await exec('npm config set user 0');
   await exec(
-    `${sudoPath} npm install -f canvas@2 vega@5 vega-cli@5 vega-lite@4 ${pkg}${
+    `${sudoPath} npm install -g canvas@2 vega@5 vega-cli@5 vega-lite@4 ${pkg}${
       version !== 'latest' ? `@${version}` : ''
     }`
   );

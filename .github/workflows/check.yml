@@ -60,7 +60,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo 'Hello CML from ${{ matrix.system }}!' > report.md
+          echo 'Hello CML' > report.md
 
           vl2svg assets/vega-lite.json | cml publish --md >> report.md
           vl2png assets/vega-lite.json | cml publish --md >> report.md

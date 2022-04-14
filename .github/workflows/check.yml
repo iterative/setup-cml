@@ -51,7 +51,7 @@ jobs:
       - name: local action with defaults
         uses: ./
         with:
-          version: 'latest'
+          version: '0.14.1'
       - name: test CML latest version
         if: matrix.system != 'windows-latest'
         run: |

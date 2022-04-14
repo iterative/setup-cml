@@ -14,9 +14,9 @@ jobs:
           - ubuntu-latest
           - macos-latest
           - windows-latest
-        include:
-          - system: ubuntu-18.04
-            container: ubuntu:18.04
+        #include:
+        # - system: ubuntu-18.04
+        #container: ubuntu:18.04
     runs-on: ${{ matrix.system }}
     container: ${{ matrix.container }}
     steps:

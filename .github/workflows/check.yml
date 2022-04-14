@@ -49,6 +49,7 @@ jobs:
             exit 1
           fi
       - name: local action with defaults
+        uses: ./
         with:
           version: 'latest'
       - name: test CML latest version

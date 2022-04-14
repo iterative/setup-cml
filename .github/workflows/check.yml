@@ -12,8 +12,8 @@ jobs:
       matrix:
         system:
           - ubuntu-latest
-          - macos-latest
-          # - windows-latest
+          # - macos-latest
+          - windows-latest
         # include:
         # - system: ubuntu-18.04
         # container: ubuntu:18.04

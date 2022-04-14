@@ -34,7 +34,7 @@ jobs:
           matrix.container == 'ubuntu:18.04' || matrix.system ==
           'windows-latest'
         with:
-          node-version: '12'
+          node-version: '16'
       - run: npm ci
       - run: npm run lint
       - run: npm run test

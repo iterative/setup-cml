@@ -30,8 +30,12 @@ const setupCml = async opts => {
     }
   }
 
+  console.log(`cconfig set user 0`);
+  await exec(`${sudoPath} npm config set user 0`);
+
   try {
     console.log(`cml --version`);
+    // console.log(await exec('cml --version'))
     const cmlVer = await exec('cml --version');
     let ver = version;
     console.log(`check latest`);
@@ -41,9 +45,6 @@ const setupCml = async opts => {
       return;
     }
   } catch (err) {}
-
-  console.log(`cconfig set user 0`);
-  await exec(`${sudoPath} npm config set user 0`);
 
   console.log('Uninstalling previous CML');
   console.log(await exec(`${sudoPath} npm uninstall -g ${pkg}`));

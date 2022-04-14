@@ -12,11 +12,11 @@ jobs:
       matrix:
         system:
           - ubuntu-latest
-          # - macos-latest
+          - macos-latest
           - windows-latest
-        # include:
-        # - system: ubuntu-18.04
-        # container: ubuntu:18.04
+        include:
+          - system: ubuntu-18.04
+            container: ubuntu:18.04
     runs-on: ${{ matrix.system }}
     container: ${{ matrix.container }}
     steps:
@@ -38,32 +38,32 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test
-      - name: local action with '0.14.0'
+      - name: local action with '0.8.0'
         uses: ./
         with:
-          version: '0.14.0'
+          version: '0.8.0'
       - name: test CML specific version
         if: matrix.system != 'windows-latest'
         run: |
-          if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
+          if [ "$(cml --version 2>&1)" != '0.8.0' ]; then
             exit 1
           fi
-        #uses: ./
-      # - name: local action with defaults
-      # - name: test CML latest version
-      #   if: matrix.system != 'windows-latest'
-      #   run: |
-      #     if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
-      #       exit 1
-      #     fi
+      - name: local action with defaults
+        uses: ./
+      - name: test CML latest version
+        if: matrix.system != 'windows-latest'
+        run: |
+          if [ "$(cml --version 2>&1)" == '0.8.0' ]; then
+            exit 1
+          fi
       - name: test CML
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo 'Hello CML' > report.md
+          echo 'Hello CML from ${{ matrix.system }}!' > report.md
 
-          #vl2svg assets/vega-lite.json | cml publish --md >> report.md
-          #vl2png assets/vega-lite.json | cml publish --md >> report.md
+          vl2svg assets/vega-lite.json | cml publish --md >> report.md
+          vl2png assets/vega-lite.json | cml publish --md >> report.md
 
           cml send-comment report.md
           cml send-github-check report.md

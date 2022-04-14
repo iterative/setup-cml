@@ -48,14 +48,14 @@ jobs:
           if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
             exit 1
           fi
-        # uses: ./
+        uses: ./
       # - name: local action with defaults
-      - name: test CML latest version
-        if: matrix.system != 'windows-latest'
-        run: |
-          if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
-            exit 1
-          fi
+      # - name: test CML latest version
+      #   if: matrix.system != 'windows-latest'
+      #   run: |
+      #     if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
+      #       exit 1
+      #     fi
       - name: test CML
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}

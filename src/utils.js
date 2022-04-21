@@ -62,7 +62,7 @@ const setupCml = async opts => {
   ); */
 
   const { version } = opts;
-  console.log(await exec(`Installing CML version ${version}`));
+  console.log(await exec(`echo Installing CML version ${version}`));
 };
 
 exports.exec = exec;

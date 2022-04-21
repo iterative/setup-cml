@@ -30,6 +30,7 @@ const setupCml = async opts => {
     }
   }
 
+  /*
   try {
     const cmlVer = await exec('cml --version');
     let ver = version;
@@ -40,6 +41,7 @@ const setupCml = async opts => {
       return;
     }
   } catch (err) {}
+  */
 
   console.log('Uninstalling previous CML');
   await exec(`${sudoPath} npm uninstall -g ${pkg}`);

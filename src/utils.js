@@ -17,7 +17,7 @@ const exec = async (command, opts) => {
 
 const setupCml = async opts => {
   const { version, sudo = true, force = false } = opts;
-  const pkg = '@dvcorg/cml';
+  // const pkg = '@dvcorg/cml';
 
   let sudoPath = '';
   if (sudo) {
@@ -30,7 +30,6 @@ const setupCml = async opts => {
     }
   }
 
-  /*
   try {
     const cmlVer = await exec('cml --version');
     let ver = version;
@@ -38,11 +37,10 @@ const setupCml = async opts => {
     if (ver === 'latest') ver = await exec('npm show @dvcorg/cml version');
     if (!force && cmlVer.includes(ver)) {
       console.log(`CML ${version} is already installed. Nothing to do.`);
-      return;
     }
   } catch (err) {}
-  */
 
+  /*
   console.log('Uninstalling previous CML');
   console.log(await exec(`${sudoPath} npm uninstall -g ${pkg}`));
 
@@ -57,6 +55,7 @@ const setupCml = async opts => {
       }`
     )
   );
+  */
 };
 
 exports.exec = exec;

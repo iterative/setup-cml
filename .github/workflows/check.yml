@@ -54,8 +54,8 @@ jobs:
           # fi
           echo OK
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
 
       - name: local action with defaults
         uses: ./

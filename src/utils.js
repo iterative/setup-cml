@@ -3,10 +3,8 @@ const util = require('util');
 const execp = util.promisify(require('child_process').exec);
 const exec = async (command, opts) => {
   return new Promise(function(resolve, reject) {
-    const { debug } = opts || {};
-
     execp(command, (error, stdout, stderr) => {
-      if (debug) console.log(`\nCommand: ${command}\n\t${stdout}\n\t${stderr}`);
+      console.log(`\nCommand: ${command}\n\t${stdout}\n\t${stderr}`);
 
       if (error) reject(error);
 
@@ -22,7 +20,6 @@ const setupCml = async opts => {
   let sudoPath = '';
   if (sudo) {
     try {
-      console.log(`sudo`);
       sudoPath = await exec('which sudo');
     } catch (err) {}
     if (sudoPath) {

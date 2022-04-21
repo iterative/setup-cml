@@ -41,15 +41,15 @@ jobs:
       - run: npm run lint
       - run: npm run test
 
-      - name: local action with '0.11.0'
+      - name: local action with '0.14.0'
         uses: ./
         with:
-          version: '0.11.0'
+          version: '0.14.0'
 
       - name: test CML specific version
         if: matrix.system != 'windows-latest'
         run: |
-          # if [ "$(cml --version 2>&1)" != '0.11.0' ]; then
+          # if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
           #   exit 1
           # fi
           echo OK
@@ -65,7 +65,7 @@ jobs:
       - name: test CML latest version
         if: matrix.system != 'windows-latest'
         run: |
-          # if [ "$(cml --version 2>&1)" == '0.11.0' ]; then
+          # if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
           #   exit 1
           # fi
           echo OK

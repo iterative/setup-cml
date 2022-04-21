@@ -5,8 +5,8 @@ const { setupCml } = require('./utils');
   try {
     const version = core.getInput('version');
     const sudo = core.getBooleanInput('sudo');
-    const force = core.getBooleanInput('force');
-    await setupCml({ version, sudo, force });
+    // const force = core.getBooleanInput('force');
+    await setupCml({ version, sudo, force: false });
   } catch (error) {
     core.setFailed(error.message);
   }

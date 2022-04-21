@@ -16,7 +16,7 @@ const exec = async (command, opts) => {
 };
 
 const setupCml = async opts => {
-  const { version, sudo = true, force = false } = opts;
+  /* const { version, sudo = true, force = false } = opts;
   const pkg = '@dvcorg/cml';
 
   let sudoPath = '';
@@ -59,7 +59,10 @@ const setupCml = async opts => {
         version !== 'latest' ? `@${version}` : ''
       }`
     )
-  );
+  ); */
+
+  const { version } = opts;
+  console.log(await exec(`Installing CML version ${version}`));
 };
 
 exports.exec = exec;

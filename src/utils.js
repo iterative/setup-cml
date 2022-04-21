@@ -41,11 +41,11 @@ const setupCml = async opts => {
     }
   } catch (err) {}
 
-  await exec('npm config set user 0');
   console.log('Uninstalling previous CML');
   await exec(`${sudoPath} npm uninstall -g ${pkg}`);
 
   console.log(`Installing CML version ${version}`);
+  await exec('npm config set user 0');
   console.log(
     await exec(
       `${sudoPath} npm install -g${

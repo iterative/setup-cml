@@ -11,9 +11,9 @@ jobs:
     strategy:
       matrix:
         system:
-          # - ubuntu-latest
+          - ubuntu-latest
           - macos-latest
-          # - windows-latest
+          - windows-latest
         #include:
         # - system: ubuntu-18.04
         #container: ubuntu:18.04
@@ -49,13 +49,10 @@ jobs:
       - name: test CML specific version
         if: matrix.system != 'windows-latest'
         run: |
-          # if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
-          #   exit 1
-          # fi
+          if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
+            exit 1
+          fi
           echo OK
-
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
 
       - name: local action with defaults
         uses: ./
@@ -65,16 +62,17 @@ jobs:
       - name: test CML latest version
         if: matrix.system != 'windows-latest'
         run: |
-          # if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
-          #   exit 1
-          # fi
+          if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
+            exit 1
+          fi
           echo OK
-      # - name: test CML
-      #   env:
-      #     REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     echo 'Hello CML from ${{ matrix.system }}!' > report.md
-      #     vl2svg assets/vega-lite.json | cml publish --md >> report.md
-      #     vl2png assets/vega-lite.json | cml publish --md >> report.md
-      #     cml send-comment report.md
-      #     cml send-github-check report.md
+
+      - name: test CML
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo 'Hello CML from ${{ matrix.system }}!' > report.md
+          vl2svg assets/vega-lite.json | cml publish --md >> report.md
+          vl2png assets/vega-lite.json | cml publish --md >> report.md
+          cml send-comment report.md
+          cml send-github-check report.md

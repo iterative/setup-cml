@@ -14,7 +14,7 @@ const exec = async (command, opts) => {
 };
 
 const setupCml = async opts => {
-  const { version, sudo = true, force = false } = opts;
+  const { version = 'latest', sudo = true, force = false } = opts;
   const pkg = '@dvcorg/cml';
 
   let sudoPath = '';
@@ -28,9 +28,8 @@ const setupCml = async opts => {
   }
 
   try {
-    const cmlVer = await exec('cml --version');
+    const cmlVer = await exec('echo none | cml --version');
     let ver = version;
-    console.log(`check latest`);
     if (ver === 'latest') ver = await exec('npm show @dvcorg/cml version');
     if (!force && cmlVer.includes(ver)) {
       console.log(`CML ${version} is already installed. Nothing to do.`);

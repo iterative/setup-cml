@@ -56,6 +56,11 @@ jobs:
 
       - name: local action with defaults
         uses: ./
+        run: |
+          if [[ "$(node dist/index.js 2>&1)" != *'Nothing to do'* ]]; then
+            exit 1
+          fi
+          echo OK
 
       - name: test CML latest version
         if: matrix.system != 'windows-latest'

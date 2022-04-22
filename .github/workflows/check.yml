@@ -56,16 +56,18 @@ jobs:
 
       - name: local action with defaults
         uses: ./
-        run: |
-          if [[ "$(node dist/index.js 2>&1)" != *'Nothing to do'* ]]; then
-            exit 1
-          fi
-          echo OK
 
       - name: test CML latest version
         if: matrix.system != 'windows-latest'
         run: |
           if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
+            exit 1
+          fi
+          echo OK
+
+      - name: new installation should do nothing
+        run: |
+          if [[ "$(node dist/index.js 2>&1)" != *'Nothing to do'* ]]; then
             exit 1
           fi
           echo OK

@@ -65,16 +65,6 @@ jobs:
           fi
           echo OK
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
-
-      - name: new installation should do nothing
-        run: |
-          if [[ "$(node dist/index.js 2>&1)" != *'Nothing to do'* ]]; then
-            exit 1
-          fi
-          echo OK
-
       - name: test CML
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}

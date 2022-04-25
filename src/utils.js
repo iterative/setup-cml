@@ -30,7 +30,7 @@ const setupCml = async opts => {
   }
 
   try {
-    const cmlVer = await exec('echo none | cml --version');
+    const cmlVer = await exec(':|cml --version');
     let ver = version;
     if (ver === 'latest') ver = await exec('npm show @dvcorg/cml version');
     if (!force && cmlVer.includes(ver)) {

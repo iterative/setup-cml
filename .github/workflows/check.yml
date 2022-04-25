@@ -79,3 +79,4 @@ jobs:
         run: |
           echo 'Hello CML from ${{ matrix.system }}!' > report.md
           cml send-comment report.md
+          cml send-github-check report.md

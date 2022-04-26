@@ -10,6 +10,10 @@ inputs:
     description: A flag to disable the use of sudo whilst installing CML.
     default: true
     required: false
+  force:
+    description: Force install CML if it exists.
+    default: false
+    required: false
 runs:
   using: node12
   main: dist/index.js

@@ -68,8 +68,12 @@ steps:
 The following inputs are supported.
 
 - `version` - (optional) The version of CML to install (e.g. '3.0.0'). Defaults
-  to 'latest' for the
+  to `latest` for the
   [most recent CML release](https://github.com/iterative/cml/releases).
+- `sudo` - (optional) Enables the use of sudo whilst installing CML. Defaults to
+  `true`
+- `force` - (optional) Forces the install. Useful in scenarios where CML is
+  already installed and in use. Defaults to `false`
 
 ## A complete example
 

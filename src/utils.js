@@ -16,7 +16,9 @@ const exec = async (command, opts) => {
 };
 
 const setupCml = async opts => {
-  const { version, sudo = true } = opts;
+  const { version = 'latest', sudo = true, force = false } = opts;
+  const pkg = '@dvcorg/cml';
+
   let sudoPath = '';
   if (sudo) {
     try {
@@ -27,19 +29,29 @@ const setupCml = async opts => {
     }
   }
 
-  await exec(`${sudoPath} npm config set user 0`);
+  try {
+    const cmlVer = await exec(':|cml --version');
+    let ver = version;
+    if (ver === 'latest') ver = await exec('npm show @dvcorg/cml version');
+    if (!force && cmlVer.includes(ver)) {
+      console.log(`CML ${version} is already installed. Nothing to do.`);
+      return;
+    }
+  } catch (err) {}
 
   console.log('Uninstalling previous CML');
-  await exec(
-    `${sudoPath} npm uninstall -g canvas vega vega-cli vega-lite @dvcorg/cml`
-  );
+  await exec(`${sudoPath} npm uninstall -g ${pkg}`);
 
   console.log(`Installing CML version ${version}`);
   await exec('npm config set user 0');
-  await exec(
-    `${sudoPath} npm install -g canvas@2 vega@5 vega-cli@5 vega-lite@4 @dvcorg/cml${
-      version !== 'latest' ? `@${version}` : ''
-    }`
+  console.log(
+    await exec(
+      `${sudoPath} npm install -g${
+        force ? 'f' : ''
+      } canvas@2 vega@5 vega-cli@5 vega-lite@4 ${pkg}${
+        version !== 'latest' ? `@${version}` : ''
+      }`
+    )
   );
 };
 

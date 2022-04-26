@@ -36,42 +36,47 @@ jobs:
           add-apt-repository ppa:git-core/ppa
           apt update
           apt install -y git fontconfig make gcc pkg-config
+
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         if:
           matrix.container == 'ubuntu:18.04' || matrix.system ==
           'windows-latest'
         with:
-          node-version: '12'
+          node-version: '16'
+
       - run: npm ci
       - run: npm run lint
       - run: npm run test
-      - name: local action with '0.8.0'
+
+      - name: local action with '0.14.0'
         uses: ./
         with:
-          version: '0.8.0'
+          version: '0.14.0'
+
       - name: test CML specific version
         if: matrix.system != 'windows-latest'
         run: |
-          if [ "$(cml --version 2>&1)" != '0.8.0' ]; then
+          if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
             exit 1
           fi
+          echo OK
+
       - name: local action with defaults
         uses: ./
+
       - name: test CML latest version
         if: matrix.system != 'windows-latest'
         run: |
-          if [ "$(cml --version 2>&1)" == '0.8.0' ]; then
+          if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
             exit 1
           fi
+          echo OK
+
       - name: test CML
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo 'Hello CML from ${{ matrix.system }}!' > report.md
-
-          vl2svg assets/vega-lite.json | cml publish --md >> report.md
-          vl2png assets/vega-lite.json | cml publish --md >> report.md
-
           cml send-comment report.md
           cml send-github-check report.md

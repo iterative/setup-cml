@@ -16,7 +16,7 @@ const exec = async (command, opts) => {
 };
 
 const setupCml = async opts => {
-  const { version = 'latest', sudo = true, force = false } = opts;
+  const { version = 'latest', sudo = true, force = false, ci = false } = opts;
   const pkg = '@dvcorg/cml';
 
   let sudoPath = '';
@@ -53,6 +53,8 @@ const setupCml = async opts => {
       }`
     )
   );
+
+  if (ci) console.log(await exec(`cml ci ${ci === true ? '' : ci}`));
 };
 
 exports.exec = exec;

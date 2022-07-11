@@ -48,7 +48,7 @@ const setupCml = async opts => {
     await exec(
       `${sudoPath} npm install -g${
         force ? 'f' : ''
-      } canvas@2 vega@5 vega-cli@5 vega-lite@4 ${pkg}${
+      } canvas@2 vega@5 vega-cli@5 vega-lite@5 ${pkg}${
         version !== 'latest' ? `@${version}` : ''
       }`
     )

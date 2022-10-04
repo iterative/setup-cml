@@ -16,7 +16,7 @@ This action gives you:
 
 - Access to all [CML functions](https://github.com/iterative/cml#cml-functions).
   For example:
-  - `cml create comment` for publishing data visualization and metrics from your
+  - `cml comment create` for publishing data visualization and metrics from your
     CI workflow as comments in a pull request.
   - `cml pr create` to open a pull request.
   - `cml runner launch`, a function that enables workflows to provision cloud

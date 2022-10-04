@@ -16,11 +16,11 @@ This action gives you:
 
 - Access to all [CML functions](https://github.com/iterative/cml#cml-functions).
   For example:
-  - `cml-publish` and `cml-send-comment` for publishing data visualization and
-    metrics from your CI workflow as comments in a pull request.
-  - `cml-pr` to create a pull request.
-  - `cml-runner`, a function that enables workflows to provision cloud and
-    on-premise computing resources for training models.
+  - `cml create comment` for publishing data visualization and metrics from your
+    CI workflow as comments in a pull request.
+  - `cml pr create` to open a pull request.
+  - `cml runner launch`, a function that enables workflows to provision cloud
+    and on-premise computing resources for training models.
 - The freedom 🦅 to mix and match CML with your favorite data science tools and
   environments.
 
@@ -35,7 +35,7 @@ Basic usage:
 
 ```yaml
 steps:
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@v3
   - uses: iterative/setup-cml@v1
 ```
 
@@ -43,10 +43,10 @@ A specific version can be pinned to your workflow.
 
 ```yaml
 steps:
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@v3
   - uses: iterative/setup-cml@v1
     with:
-      version: '3.0.0'
+      version: '0.18.1'
 ```
 
 Self-hosted example:
@@ -54,10 +54,10 @@ Self-hosted example:
 ```yaml
 runs-on: [self-hosted]
 steps:
-  - uses: actions/setup-node@v2
+  - uses: actions/setup-node@v3
     with:
-      node-version: '12'
-  - uses: actions/checkout@v2
+      node-version: '16'
+  - uses: actions/checkout@v3
   - uses: iterative/setup-cml@v1
     with:
       sudo: false
@@ -67,7 +67,7 @@ steps:
 
 The following inputs are supported.
 
-- `version` - (optional) The version of CML to install (e.g. '3.0.0'). Defaults
+- `version` - (optional) The version of CML to install (e.g. '0.18.1'). Defaults
   to `latest` for the
   [most recent CML release](https://github.com/iterative/cml/releases).
 - `sudo` - (optional) Enables the use of sudo whilst installing CML. Defaults to
@@ -91,11 +91,10 @@ steps:
       python train.py --output plot.png
 
       echo 'My first CML report' > report.md
-      cml-publish plot.png --md > report.md
-      cml-send-comment report.md
+      echo '![](./plot.png)' >> report.md
+      cml comment create --publish report.md
 ```
 
 ### CML functions
 
-CML provides several helper functions. See
-[the docs](https://github.com/iterative/cml#cml-functions).
+CML provides several helper functions. See [the docs](https://cml.dev/doc).

@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "@actions/core": "^1.9.1",
-    "@actions/github": "^2.2.0"
+    "@actions/github": "^2.2.0",
+    "npm-api": "^1.0.1"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.33.4",

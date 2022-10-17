@@ -1,6 +1,15 @@
 const util = require('util');
-
 const execp = util.promisify(require('child_process').exec);
+const NpmApi = require('npm-api');
+
+const getLatestVersion = pkg => {
+  const npm = new NpmApi();
+  const rs = npm.repo(pkg);
+  return rs.version('latest').then(res => {
+    console.log(`CML version command failed, latest version: ${res.version}`);
+  });
+};
+
 const exec = async (command, opts) => {
   return new Promise(function(resolve, reject) {
     const { debug } = opts || {};
@@ -37,11 +46,13 @@ const setupCml = async opts => {
       console.log(`CML ${version} is already installed. Nothing to do.`);
       return;
     }
-  } catch (err) {}
+  } catch (err) {
+    // inhance hint,so not to wait
+    getLatestVersion(pkg);
+  }
 
   console.log('Uninstalling previous CML');
   await exec(`${sudoPath} npm uninstall -g ${pkg}`);
-
   console.log(`Installing CML version ${version}`);
   await exec('npm config set user 0');
   console.log(
@@ -57,3 +68,4 @@ const setupCml = async opts => {
 
 exports.exec = exec;
 exports.setupCml = setupCml;
+exports.getLatestVersion = getLatestVersion;

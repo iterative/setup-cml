@@ -1,4 +1,4 @@
-const { exec } = require('./utils');
+const { exec, getLatestVersion } = require('./utils');
 
 describe('exec tests', () => {
   test('exec is await and outputs hello', async () => {
@@ -15,5 +15,11 @@ describe('exec tests', () => {
     }
 
     expect(error).not.toBeNull();
+  });
+
+  test('Get latest version', async () => {
+    const consoleSpy = jest.spyOn(console, 'log');
+    await getLatestVersion('@dvcorg/cml');
+    expect(consoleSpy).toHaveBeenCalled();
   });
 });

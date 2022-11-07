@@ -87,7 +87,9 @@ Assume that we have a machine learning script, `train.py` which outputs an image
 steps:
   - uses: actions/checkout@v2
   - uses: iterative/setup-cml@v1
-  - run: |
+  - env:
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Can use the default token for most functions
+    run: |
       python train.py --output plot.png
 
       echo 'My first CML report' > report.md

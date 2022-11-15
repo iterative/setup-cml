@@ -96,8 +96,8 @@ steps:
       echo '![](./plot.png)' >> report.md
       cml comment create --publish report.md
 ```
-In General [GitHub's runner token can be given enough permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) to perform most functions.
-When using the cml runner launch command a [PAT is required](https://cml.dev/doc/self-hosted-runners?tab=GitHub#personal-access-token)
+In general [GitHub's runner token can be given enough permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) to perform most functions.
+When using the `cml runner launch` command a [PAT is required](https://cml.dev/doc/self-hosted-runners?tab=GitHub#personal-access-token)
 
 ### CML functions
 

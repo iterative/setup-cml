@@ -87,13 +87,17 @@ Assume that we have a machine learning script, `train.py` which outputs an image
 steps:
   - uses: actions/checkout@v2
   - uses: iterative/setup-cml@v1
-  - run: |
+  - env:
+      REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Can use the default token for most functions
+    run: |
       python train.py --output plot.png
 
       echo 'My first CML report' > report.md
       echo '![](./plot.png)' >> report.md
       cml comment create --publish report.md
 ```
+In general [GitHub's runner token can be given enough permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) to perform most functions.
+When using the `cml runner launch` command a [PAT is required](https://cml.dev/doc/self-hosted-runners?tab=GitHub#personal-access-token)
 
 ### CML functions
 

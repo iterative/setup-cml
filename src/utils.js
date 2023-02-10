@@ -43,7 +43,12 @@ const setupCml = async opts => {
   await exec(`${sudoPath} npm uninstall -g ${pkg}`);
 
   console.log(`Installing CML version ${version}`);
-  await exec('npm config set user 0');
+
+  // invalid for npm v9+
+  try {
+    await exec('npm config set user 0');
+  } catch (err) {} // https://github.com/iterative/setup-cml/issues/85
+
   console.log(
     await exec(
       `${sudoPath} npm install -g${

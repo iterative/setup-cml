@@ -27,7 +27,7 @@ This action gives you:
 Note that CML does not include DVC and its dependencies (see the
 [Setup DVC Action](https://github.com/iterative/setup-dvc)).
 
-## Usage
+## Usage --
 
 This action is tested on `ubuntu-latest`, `macos-latest` and `windows-latest`.
 

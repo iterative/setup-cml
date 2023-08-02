@@ -23,9 +23,7 @@ This action gives you:
     and on-premise computing resources for training models.
 - The freedom 🦅 to mix and match CML with your favorite data science tools and
   environments.
-
-Note that CML does not include DVC and its dependencies (see the
-[Setup DVC Action](https://github.com/iterative/setup-dvc)).
+- Optional installation of DVC and its dependencies.
 
 ## Usage
 
@@ -63,6 +61,15 @@ steps:
       sudo: false
 ```
 
+Optional installation of DVC:
+```yaml
+steps:
+  - uses: actions/checkout@v3
+  - uses: iterative/setup-cml@v1
+    with:
+      dvc_version: latest
+```
+
 ## Inputs
 
 The following inputs are supported.
@@ -74,6 +81,9 @@ The following inputs are supported.
   `true`
 - `force` - (optional) Forces the install. Useful in scenarios where CML is
   already installed and in use. Defaults to `false`
+- `dvc_version` - (optional) Installs the specified version of DVC. By default
+  DVC will not be installed. `latest` can be used to install the most recent
+  DVC release.
 
 ## A complete example
 

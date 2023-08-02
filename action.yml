@@ -14,6 +14,10 @@ inputs:
     description: Force install CML if it exists.
     default: false
     required: false
+  dvc_version:
+    description: Optional version of DVC to install (eg. '3.0.0' or 'latest'). By default DVC will not be installed.
+    default: false
+    required: false
 runs:
   using: node16
   main: dist/index.js

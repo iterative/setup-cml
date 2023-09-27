@@ -14891,26 +14891,14 @@ function run() {
             const arch = os_1.default.arch();
             const platform = os_1.default.platform();
             let cmlPath = tc.find('cml', version);
-            console.log('cmlPath: ', cmlPath);
             if (cmlPath) {
                 core.addPath(cmlPath);
             }
             else {
                 const filename = deriveCMLAsset(arch, platform);
-                console.log('filename: ', filename);
                 const { url, version: retrievedVersion } = yield getCmlDownloadUrl(version, filename);
-                console.log('url: ', url);
-                console.log('retrievedVersion: ', retrievedVersion);
                 cmlPath = yield tc.downloadTool(url);
-                const downloadedCML = `${cmlPath}/${filename}`;
-                const nomalizedCML = `${cmlPath}/cml`;
-                console.log('cmlPath: ', cmlPath);
-                console.log((0, fs_1.lstatSync)(cmlPath));
-                //console.log(lstatSync(downloadedCML));
-                //copyFileSync(downloadedCML, nomalizedCML);
                 const cachedCML = yield tc.cacheFile(cmlPath, 'cml', 'cml', retrievedVersion);
-                console.log('cachedCML: ', cachedCML);
-                console.log((0, fs_1.lstatSync)(cachedCML));
                 (0, fs_1.chmodSync)(`${cachedCML}/cml`, '755');
                 core.addPath(cachedCML);
             }

@@ -19,9 +19,11 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           npm ci
+          npm run format
+          npm run lint
           npm run build
           git diff --exit-code
-  check:
+  test:
     defaults:
       run:
         shell: bash
@@ -37,10 +39,10 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test
-#      - name: local action with '0.14.0'
-#        uses: ./
-#        with:
-#          version: '0.14.0'
+      - name: run action with latest
+        uses: ./
+      - name: test
+        run: cml --version
 #
 #      - name: test CML specific version
 #        if: matrix.system != 'windows-latest'

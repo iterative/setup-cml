@@ -4,7 +4,7 @@ import {Octokit} from '@octokit/rest';
 import os from 'os';
 import {chmodSync} from 'fs';
 
-export async function run() {
+async function run() {
   try {
     const version = core.getInput('version');
     const arch = os.arch();
@@ -90,3 +90,5 @@ function deriveCMLAsset(arch: string, platform: string): string {
       throw new Error(`CML Unsupported platform ${platform}`);
   }
 }
+
+run();

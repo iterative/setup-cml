@@ -10636,7 +10636,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.run = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const tc = __importStar(__nccwpck_require__(7784));
 const rest_1 = __nccwpck_require__(5375);
@@ -10672,7 +10671,6 @@ function run() {
         }
     });
 }
-exports.run = run;
 function getCmlDownloadUrl(version, assetName) {
     return __awaiter(this, void 0, void 0, function* () {
         const octokit = new rest_1.Octokit();
@@ -10715,6 +10713,7 @@ function deriveCMLAsset(arch, platform) {
             throw new Error(`CML Unsupported platform ${platform}`);
     }
 }
+run();
 
 
 /***/ }),

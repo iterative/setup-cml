@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const { setupCml, isNode16 } = require('./utils');
 
 const v1Link = 'https://github.com/iterative/setup-cml/tree/v1#note-on-v1';
-const v2Link = '';
+const v2Link = 'https://github.com/iterative/setup-cml';
 
 (async () => {
   try {

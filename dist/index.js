@@ -14904,8 +14904,10 @@ function run() {
                 cmlPath = yield tc.downloadTool(url);
                 const downloadedCML = `${cmlPath}/${filename}`;
                 const nomalizedCML = `${cmlPath}/cml`;
-                (0, fs_1.copyFileSync)(downloadedCML, nomalizedCML);
                 console.log('cmlPath: ', cmlPath);
+                console.log((0, fs_1.lstatSync)(cmlPath));
+                console.log((0, fs_1.lstatSync)(downloadedCML));
+                (0, fs_1.copyFileSync)(downloadedCML, nomalizedCML);
                 const cachedCML = yield tc.cacheFile(cmlPath, 'cml', 'cml', retrievedVersion);
                 console.log('cachedCML: ', cachedCML);
                 (0, fs_1.chmodSync)(`${cachedCML}/cml`, '755');

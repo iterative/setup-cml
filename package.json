@@ -30,7 +30,7 @@
   },
   "main": "src/setup-cml.ts",
   "scripts": {
-    "build": "ncc build -o dist/setup src/setup-cml.ts && ncc build -o dist/cache-save src/cache-save.ts",
+    "build": "ncc build -o dist/ src/setup-cml.ts",
     "format": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --write \"**/*.{ts,yml,yaml}\"",
     "format-check": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --check \"**/*.{ts,yml,yaml}\"",
     "lintfix": "eslint --config ./.eslintrc.js \"**/*.ts\" --fix",
@@ -38,24 +38,26 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
+    "@actions/cache": "^3.2.2",
     "@actions/core": "^1.10.0",
-    "@actions/github": "^1.1.0",
-    "@actions/cache": "^3.2.2"
+    "@actions/tool-cache": "^2.0.1",
+    "@octokit/rest": "^20.0.2"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.33.4",
-    "eslint": "^8.35.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-jest": "^27.2.1",
-    "eslint-plugin-node": "^11.1.0",
-    "prettier": "^2.8.4",
-    "jest": "^27.2.5",
-    "ts-jest": "^27.0.5",
+    "@octokit/types": "^12.0.0",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.25",
     "@types/semver": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
+    "@vercel/ncc": "^0.38.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-node": "^11.1.0",
+    "jest": "^27.2.5",
+    "prettier": "^2.8.4",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.2.3"
   }
 }

@@ -6,19 +6,9 @@ inputs:
     description: The version of CML to install (e.g. '3.0.0').
     default: latest
     required: false
-  sudo:
-    description: A flag to disable the use of sudo whilst installing CML.
-    default: true
-    required: false
-  force:
-    description: Force install CML if it exists.
-    default: false
-    required: false
 runs:
   using: node16
-  main: dist/setup/index.js
-  post: dist/cache-save/index.js
-  post-if: success()
+  main: dist/index.js
 branding:
   icon: terminal
   color: purple

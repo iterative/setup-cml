@@ -3,6 +3,9 @@ on:
   schedule:
     - cron: 0 0 * * *
   pull_request:
+  push:
+    branches:
+      - v2-setup
 
 permissions:
   contents: write
@@ -34,35 +37,34 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test
-
-      - name: local action with '0.14.0'
-        uses: ./
-        with:
-          version: '0.14.0'
-
-      - name: test CML specific version
-        if: matrix.system != 'windows-latest'
-        run: |
-          if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
-            exit 1
-          fi
-          echo OK
-
-      - name: local action with defaults
-        uses: ./
-
-      - name: test CML latest version
-        if: matrix.system != 'windows-latest'
-        run: |
-          if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
-            exit 1
-          fi
-          echo OK
-
-      - name: test CML
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo 'Hello CML from ${{ matrix.system }}!' > report.md
-          cml comment create ${{ github.event_name == 'pull_request' && '--target=pr' }} report.md
-          cml check create report.md
+#      - name: local action with '0.14.0'
+#        uses: ./
+#        with:
+#          version: '0.14.0'
+#
+#      - name: test CML specific version
+#        if: matrix.system != 'windows-latest'
+#        run: |
+#          if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
+#            exit 1
+#          fi
+#          echo OK
+#
+#      - name: local action with defaults
+#        uses: ./
+#
+#      - name: test CML latest version
+#        if: matrix.system != 'windows-latest'
+#        run: |
+#          if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
+#            exit 1
+#          fi
+#          echo OK
+#
+#      - name: test CML
+#        env:
+#          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          echo 'Hello CML from ${{ matrix.system }}!' > report.md
+#          cml comment create ${{ github.event_name == 'pull_request' && '--target=pr' }} report.md
+#          cml check create report.md

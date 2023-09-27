@@ -38,14 +38,13 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "@actions/cache": "^3.2.2",
     "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
     "@actions/tool-cache": "^2.0.1",
     "@octokit/rest": "^20.0.2",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@octokit/types": "^12.0.0",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.25",
     "@types/semver": "^6.0.0",

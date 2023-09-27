@@ -6,6 +6,10 @@ inputs:
     description: The version of CML to install (e.g. '3.0.0').
     default: latest
     required: false
+  vega:
+    description: Whether to install Vega tools
+    default: 'true'
+    required: false
 runs:
   using: node16
   main: dist/index.js

@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import * as tc from '@actions/tool-cache';
+import {exec} from '@actions/exec';
 import fetch from 'node-fetch'; // can be remove is github actions runs node 18 > https://github.com/octokit/octokit.js/#fetch-missing
 import {Octokit} from '@octokit/rest';
 import os from 'os';
@@ -8,6 +9,7 @@ import {chmodSync} from 'fs';
 async function run() {
   try {
     const version = core.getInput('version');
+    const vega = core.getBooleanInput('vega');
     const arch = os.arch();
     const platform = os.platform();
 
@@ -29,6 +31,13 @@ async function run() {
       );
       chmodSync(`${cachedCML}/cml`, '755');
       core.addPath(cachedCML);
+    }
+    if (vega) {
+      try {
+        exec('npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5`');
+      } catch (error: any) {
+        core.warning('Failed to intall vega tools');
+      }
     }
   } catch (error: any) {
     core.setFailed(error);

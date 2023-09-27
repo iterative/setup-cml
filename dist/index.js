@@ -14880,6 +14880,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const tc = __importStar(__nccwpck_require__(7784));
+const exec_1 = __nccwpck_require__(1514);
 const node_fetch_1 = __importDefault(__nccwpck_require__(4429)); // can be remove is github actions runs node 18 > https://github.com/octokit/octokit.js/#fetch-missing
 const rest_1 = __nccwpck_require__(5375);
 const os_1 = __importDefault(__nccwpck_require__(2037));
@@ -14888,6 +14889,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const version = core.getInput('version');
+            const vega = core.getBooleanInput('vega');
             const arch = os_1.default.arch();
             const platform = os_1.default.platform();
             let cmlPath = tc.find('cml', version);
@@ -14901,6 +14903,14 @@ function run() {
                 const cachedCML = yield tc.cacheFile(cmlPath, 'cml', 'cml', retrievedVersion);
                 (0, fs_1.chmodSync)(`${cachedCML}/cml`, '755');
                 core.addPath(cachedCML);
+            }
+            if (vega) {
+                try {
+                    (0, exec_1.exec)('npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5`');
+                }
+                catch (error) {
+                    core.warning('Failed to intall vega tools');
+                }
             }
         }
         catch (error) {

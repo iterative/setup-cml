@@ -27,7 +27,7 @@ This action gives you:
 Note that CML does not include DVC and its dependencies (see the
 [Setup DVC Action](https://github.com/iterative/setup-dvc)).
 
-## Note on `iterative/setup-cml@v1`
+## Note on `v1`
 
 v1 of this action uses `npm install` to install CML, on to the system, CML has a
 dependency which requires node 16, the github actions default environment now

@@ -16,7 +16,9 @@ inputs:
     required: false
 runs:
   using: node16
-  main: dist/index.js
+  main: dist/setup/index.js
+  post: dist/cache-save/index.js
+  post-if: success()
 branding:
   icon: terminal
   color: purple

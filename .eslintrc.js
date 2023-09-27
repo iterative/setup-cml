@@ -1,29 +1,38 @@
 module.exports = {
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true
-  },
   extends: [
-    'standard',
-    'prettier'
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:eslint-plugin-jest/recommended',
+    'eslint-config-prettier'
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
-  },
-  parserOptions: {
-    ecmaVersion: 2018
-  },
-  ignorePatterns: ['assets/',  'dist/', 'node_modules/'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'eslint-plugin-node', 'eslint-plugin-jest'],
   rules: {
-    'camelcase': [1, {'properties': 'never'}],
-    'prettier/prettier': 'error'
+    '@typescript-eslint/no-require-imports': 'error',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/ban-ts-comment': [
+      'error',
+      {
+        'ts-ignore': 'allow-with-description'
+      }
+    ],
+    'no-console': 'error',
+    'yoda': 'error',
+    'prefer-const': [
+      'error',
+      {
+        destructuring: 'all'
+      }
+    ],
+    'no-control-regex': 'off',
+    'no-constant-condition': ['error', {checkLoops: false}],
+    'node/no-extraneous-import': 'error'
   },
-  plugins: [
-    'prettier'
-  ],
   env: {
-    jest: true
+    node: true,
+    es6: true,
+    'jest/globals': true
   }
-}
+};

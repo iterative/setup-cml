@@ -45,7 +45,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo 'Hello CML from ${{ matrix.system }}!' > report.md
-          cml comment create ${{ github.event_name == 'pull_request' && '--target=pr' }} report.md
+          cml comment create report.md
           cml check create report.md
   test-version:
     defaults:

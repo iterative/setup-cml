@@ -23,7 +23,7 @@ jobs:
           npm run lint
           npm run build
           git diff --exit-code
-  test:
+  test-latest:
     defaults:
       run:
         shell: bash
@@ -36,37 +36,37 @@ jobs:
     runs-on: ${{ matrix.system }}
     steps:
       - uses: actions/checkout@v3
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test
       - name: run action with latest
         uses: ./
       - name: test
         run: cml --version
-#
-#      - name: test CML specific version
-#        if: matrix.system != 'windows-latest'
-#        run: |
-#          if [ "$(cml --version 2>&1)" != '0.14.0' ]; then
-#            exit 1
-#          fi
-#          echo OK
-#
-#      - name: local action with defaults
-#        uses: ./
-#
-#      - name: test CML latest version
-#        if: matrix.system != 'windows-latest'
-#        run: |
-#          if [ "$(cml --version 2>&1)" == '0.14.0' ]; then
-#            exit 1
-#          fi
-#          echo OK
-#
-#      - name: test CML
-#        env:
-#          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          echo 'Hello CML from ${{ matrix.system }}!' > report.md
-#          cml comment create ${{ github.event_name == 'pull_request' && '--target=pr' }} report.md
-#          cml check create report.md
+      - name: test CML
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo 'Hello CML from ${{ matrix.system }}!' > report.md
+          cml comment create ${{ github.event_name == 'pull_request' && '--target=pr' }} report.md
+          cml check create report.md
+  test-version:
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        system:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.system }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: run action with latest
+        uses: ./
+        with:
+          version: v0.15.1
+      - name: test CML specific version
+        run: |
+          if [ "$(cml --version 2>&1)" != '0.15.1' ]; then
+            exit 1
+          fi
+          echo OK

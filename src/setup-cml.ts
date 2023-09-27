@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import * as tc from '@actions/tool-cache';
+import fetch from 'node-fetch';
 import {Octokit} from '@octokit/rest';
 import os from 'os';
 import {chmodSync} from 'fs';
@@ -49,7 +50,11 @@ async function getCmlDownloadUrl(
   version: string,
   assetName: string
 ): Promise<CMLDownloadResponse> {
-  const octokit = new Octokit();
+  const octokit = new Octokit({
+    request: {
+      fetch: fetch
+    }
+  });
   let release;
   if (version == 'latest') {
     const response = await octokit.repos.getLatestRelease({

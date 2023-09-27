@@ -33,6 +33,7 @@ Note that CML does not include DVC and its dependencies (see the
 pre-packaged binaries. Then attempts to run `npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5`
 if you do not wish to install these tools pass `vega: false` to the action.
 
+link to [`v1`](https://github.com/iterative/setup-cml/tree/v1)
 ## Usage
 
 This action is tested on `ubuntu-latest`, `macos-latest` and `windows-latest`.

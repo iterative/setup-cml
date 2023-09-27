@@ -10649,14 +10649,20 @@ function run() {
             const arch = os_1.default.arch();
             const platform = os_1.default.platform();
             let cmlPath = tc.find('cml', version);
+            console.log('cmlPath: ', cmlPath);
             if (cmlPath) {
                 core.addPath(cmlPath);
             }
             else {
                 const filename = deriveCMLAsset(arch, platform);
+                console.log('filename: ', filename);
                 const { url, version: retrievedVersion } = yield getCmlDownloadUrl(version, filename);
+                console.log('url: ', url);
+                console.log('retrievedVersion: ', retrievedVersion);
                 cmlPath = yield tc.downloadTool(url);
+                console.log('cmlPath: ', cmlPath);
                 const cachedCML = yield tc.cacheFile(cmlPath, filename, 'cml', retrievedVersion);
+                console.log('cachedCML: ', cachedCML);
                 (0, fs_1.chmodSync)(cachedCML, '755');
                 core.addPath(cachedCML);
             }

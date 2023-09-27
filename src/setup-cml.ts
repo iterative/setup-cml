@@ -11,21 +11,27 @@ export async function run() {
     const platform = os.platform();
 
     let cmlPath = tc.find('cml', version);
+    console.log('cmlPath: ', cmlPath);
     if (cmlPath) {
       core.addPath(cmlPath);
     } else {
       const filename = deriveCMLAsset(arch, platform);
+      console.log('filename: ', filename);
       const {url, version: retrievedVersion} = await getCmlDownloadUrl(
         version,
         filename
       );
+      console.log('url: ', url);
+      console.log('retrievedVersion: ', retrievedVersion);
       cmlPath = await tc.downloadTool(url);
+      console.log('cmlPath: ', cmlPath);
       const cachedCML = await tc.cacheFile(
         cmlPath,
         filename,
         'cml',
         retrievedVersion
       );
+      console.log('cachedCML: ', cachedCML);
       chmodSync(cachedCML, '755');
       core.addPath(cachedCML);
     }

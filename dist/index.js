@@ -14880,7 +14880,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const tc = __importStar(__nccwpck_require__(7784));
-const node_fetch_1 = __importDefault(__nccwpck_require__(4429));
+const node_fetch_1 = __importDefault(__nccwpck_require__(4429)); // can be remove is github actions runs node 18 > https://github.com/octokit/octokit.js/#fetch-missing
 const rest_1 = __nccwpck_require__(5375);
 const os_1 = __importDefault(__nccwpck_require__(2037));
 const fs_1 = __nccwpck_require__(7147);
@@ -14902,10 +14902,13 @@ function run() {
                 console.log('url: ', url);
                 console.log('retrievedVersion: ', retrievedVersion);
                 cmlPath = yield tc.downloadTool(url);
+                const downloadedCML = `${cmlPath}/${filename}`;
+                const nomalizedCML = `${cmlPath}/cml`;
+                (0, fs_1.copyFileSync)(downloadedCML, nomalizedCML);
                 console.log('cmlPath: ', cmlPath);
-                const cachedCML = yield tc.cacheFile(cmlPath, filename, 'cml', retrievedVersion);
+                const cachedCML = yield tc.cacheFile(cmlPath, 'cml', 'cml', retrievedVersion);
                 console.log('cachedCML: ', cachedCML);
-                (0, fs_1.chmodSync)(cachedCML, '755');
+                (0, fs_1.chmodSync)(`${cachedCML}/cml`, '755');
                 core.addPath(cachedCML);
             }
         }

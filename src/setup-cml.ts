@@ -1,9 +1,9 @@
 import * as core from '@actions/core';
 import * as tc from '@actions/tool-cache';
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'; // can be remove is github actions runs node 18 > https://github.com/octokit/octokit.js/#fetch-missing
 import {Octokit} from '@octokit/rest';
 import os from 'os';
-import {chmodSync} from 'fs';
+import {chmodSync, copyFileSync} from 'fs';
 
 async function run() {
   try {
@@ -25,15 +25,18 @@ async function run() {
       console.log('url: ', url);
       console.log('retrievedVersion: ', retrievedVersion);
       cmlPath = await tc.downloadTool(url);
+      const downloadedCML = `${cmlPath}/${filename}`;
+      const nomalizedCML = `${cmlPath}/cml`;
+      copyFileSync(downloadedCML, nomalizedCML);
       console.log('cmlPath: ', cmlPath);
       const cachedCML = await tc.cacheFile(
         cmlPath,
-        filename,
+        'cml',
         'cml',
         retrievedVersion
       );
       console.log('cachedCML: ', cachedCML);
-      chmodSync(cachedCML, '755');
+      chmodSync(`${cachedCML}/cml`, '755');
       core.addPath(cachedCML);
     }
   } catch (error: any) {

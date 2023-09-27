@@ -14906,10 +14906,11 @@ function run() {
                 const nomalizedCML = `${cmlPath}/cml`;
                 console.log('cmlPath: ', cmlPath);
                 console.log((0, fs_1.lstatSync)(cmlPath));
-                console.log((0, fs_1.lstatSync)(downloadedCML));
-                (0, fs_1.copyFileSync)(downloadedCML, nomalizedCML);
+                //console.log(lstatSync(downloadedCML));
+                //copyFileSync(downloadedCML, nomalizedCML);
                 const cachedCML = yield tc.cacheFile(cmlPath, 'cml', 'cml', retrievedVersion);
                 console.log('cachedCML: ', cachedCML);
+                console.log((0, fs_1.lstatSync)(cachedCML));
                 (0, fs_1.chmodSync)(`${cachedCML}/cml`, '755');
                 core.addPath(cachedCML);
             }

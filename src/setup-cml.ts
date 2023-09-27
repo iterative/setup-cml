@@ -29,8 +29,8 @@ async function run() {
       const nomalizedCML = `${cmlPath}/cml`;
       console.log('cmlPath: ', cmlPath);
       console.log(lstatSync(cmlPath));
-      console.log(lstatSync(downloadedCML));
-      copyFileSync(downloadedCML, nomalizedCML);
+      //console.log(lstatSync(downloadedCML));
+      //copyFileSync(downloadedCML, nomalizedCML);
       const cachedCML = await tc.cacheFile(
         cmlPath,
         'cml',
@@ -38,6 +38,7 @@ async function run() {
         retrievedVersion
       );
       console.log('cachedCML: ', cachedCML);
+      console.log(lstatSync(cachedCML));
       chmodSync(`${cachedCML}/cml`, '755');
       core.addPath(cachedCML);
     }

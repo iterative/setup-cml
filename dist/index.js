@@ -14911,6 +14911,7 @@ function run() {
 function getCmlDownloadUrl(version, assetName) {
     return __awaiter(this, void 0, void 0, function* () {
         const octokit = new rest_1.Octokit({
+            token: process.env.GITHUB_TOKEN,
             request: {
                 fetch: node_fetch_1.default
             }

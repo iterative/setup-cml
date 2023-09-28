@@ -1,4 +1,5 @@
 const util = require('util');
+const semver = require('semver');
 
 const execp = util.promisify(require('child_process').exec);
 const exec = async (command, opts) => {
@@ -13,6 +14,15 @@ const exec = async (command, opts) => {
       resolve((stdout || stderr).slice(0, -1));
     });
   });
+};
+
+const isNode16 = async () => {
+  try {
+    const version = await exec('node --version');
+    return semver.satisfies(version, '16.x.x');
+  } catch (err) {
+    return false;
+  }
 };
 
 const setupCml = async opts => {
@@ -62,3 +72,4 @@ const setupCml = async opts => {
 
 exports.exec = exec;
 exports.setupCml = setupCml;
+exports.isNode16 = isNode16;

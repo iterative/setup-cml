@@ -27,6 +27,31 @@ This action gives you:
 Note that CML does not include DVC and its dependencies (see the
 [Setup DVC Action](https://github.com/iterative/setup-dvc)).
 
+## Note on `v1`
+
+v1 of this action uses `npm install` to install CML, on to the system, CML has a
+dependency which requires node 16, the github actions default environment now
+has node 18 by default, see
+[reference on preinstalled software](https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md#language-and-runtime)
+
+To have a consistent experience you should:
+
+- migrate to `iterative/setup-cml@v2` which installs CML using its prebuilt
+  binaries (packaged to contain the correct version of node)
+- or use `actions/setup-node@v3` to install node 16 before
+  `iterative/setup-cml@v1`
+
+example:
+
+```yaml
+      ...
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - uses: iterative/setup-cml@v1
+      ...
+```
+
 ## Usage
 
 This action is tested on `ubuntu-latest`, `macos-latest` and `windows-latest`.
@@ -96,8 +121,11 @@ steps:
       echo '![](./plot.png)' >> report.md
       cml comment create --publish report.md
 ```
-In general [GitHub's runner token can be given enough permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) to perform most functions.
-When using the `cml runner launch` command a [PAT is required](https://cml.dev/doc/self-hosted-runners?tab=GitHub#personal-access-token)
+
+In general
+[GitHub's runner token can be given enough permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)
+to perform most functions. When using the `cml runner launch` command a
+[PAT is required](https://cml.dev/doc/self-hosted-runners?tab=GitHub#personal-access-token)
 
 ### CML functions
 

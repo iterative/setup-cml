@@ -10,8 +10,8 @@ const v2Link = 'https://github.com/iterative/setup-cml';
     const sudo = core.getBooleanInput('sudo');
     const force = core.getBooleanInput('force');
 
+    await setupCml({ version, sudo, force });
     if (await isNode16()) {
-      await setupCml({ version, sudo, force });
       core.info(`Consider Migrating to setup-cml@v2: ${v2Link}`);
     } else {
       core.warning(`CML may not function properly see: ${v1Link}`);

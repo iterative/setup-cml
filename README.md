@@ -27,6 +27,13 @@ This action gives you:
 Note that CML does not include DVC and its dependencies (see the
 [Setup DVC Action](https://github.com/iterative/setup-dvc)).
 
+## Note on v2
+
+`v1` of setup-cml was a wrapper around a set of npm installs. `v2` installs CML from its
+pre-packaged binaries. Then attempts to run `npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5`
+if you do not wish to install these tools pass `vega: false` to the action.
+
+link to [`v1`](https://github.com/iterative/setup-cml/tree/v1)
 ## Usage
 
 This action is tested on `ubuntu-latest`, `macos-latest` and `windows-latest`.
@@ -36,7 +43,7 @@ Basic usage:
 ```yaml
 steps:
   - uses: actions/checkout@v3
-  - uses: iterative/setup-cml@v1
+  - uses: iterative/setup-cml@v2
 ```
 
 A specific version can be pinned to your workflow.
@@ -44,23 +51,9 @@ A specific version can be pinned to your workflow.
 ```yaml
 steps:
   - uses: actions/checkout@v3
-  - uses: iterative/setup-cml@v1
+  - uses: iterative/setup-cml@v2
     with:
       version: '0.18.1'
-```
-
-Self-hosted example:
-
-```yaml
-runs-on: [self-hosted]
-steps:
-  - uses: actions/setup-node@v3
-    with:
-      node-version: '16'
-  - uses: actions/checkout@v3
-  - uses: iterative/setup-cml@v1
-    with:
-      sudo: false
 ```
 
 ## Inputs
@@ -70,10 +63,8 @@ The following inputs are supported.
 - `version` - (optional) The version of CML to install (e.g. '0.18.1'). Defaults
   to `latest` for the
   [most recent CML release](https://github.com/iterative/cml/releases).
-- `sudo` - (optional) Enables the use of sudo whilst installing CML. Defaults to
-  `true`
-- `force` - (optional) Forces the install. Useful in scenarios where CML is
-  already installed and in use. Defaults to `false`
+- `vega` - (optional) Whether to install vega dependencies. Defaults to `true`.
+  runs command `npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5`
 
 ## A complete example
 
@@ -86,7 +77,7 @@ Assume that we have a machine learning script, `train.py` which outputs an image
 ```yaml
 steps:
   - uses: actions/checkout@v2
-  - uses: iterative/setup-cml@v1
+  - uses: iterative/setup-cml@v2
   - env:
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Can use the default token for most functions
     run: |

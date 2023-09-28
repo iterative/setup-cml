@@ -1,6 +1,6 @@
 {
   "name": "@dvcorg/setup-cml",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": {
     "name": "CML",
     "url": "https://cml.dev"
@@ -28,44 +28,36 @@
   "engines": {
     "node": ">=16.x"
   },
-  "main": "dist/index.js",
+  "main": "src/setup-cml.ts",
   "scripts": {
-    "lintfix": "eslint --fix ./",
-    "lint": "eslint ./",
-    "test": "jest --passWithNoTests",
-    "do_snapshots": "jest --updateSnapshot",
-    "build": "ncc build src/github-action.js -o dist -m"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run build && git add dist/index.js"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix"
-    ],
-    "*.{md,yaml,yml}": [
-      "prettier --write"
-    ]
+    "build": "ncc build -o dist/ src/setup-cml.ts",
+    "format": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --write \"**/*.{ts,yml,yaml}\"",
+    "format-check": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --check \"**/*.{ts,yml,yaml}\"",
+    "lintfix": "eslint --config ./.eslintrc.js \"**/*.ts\" --fix",
+    "lint": "eslint --config ./.eslintrc.js \"**/*.ts\"",
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "@actions/core": "^1.9.1",
-    "@actions/github": "^2.2.0"
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "@actions/tool-cache": "^2.0.1",
+    "@octokit/rest": "^20.0.2",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.33.4",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "eslint-plugin-promise": "^4.3.1",
-    "eslint-plugin-standard": "^4.1.0",
-    "husky": "^8.0.3",
-    "jest": "^28.0.3",
-    "lint-staged": "^13.2.1",
-    "prettier": "^1.19.1"
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.25",
+    "@types/semver": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "@vercel/ncc": "^0.38.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-node": "^11.1.0",
+    "jest": "^27.2.5",
+    "prettier": "^2.8.4",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.2.3"
   }
 }

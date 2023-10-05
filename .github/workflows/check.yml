@@ -25,6 +25,7 @@ jobs:
       run:
         shell: bash
     strategy:
+      max-parallel: 1
       matrix:
         system:
           - ubuntu-latest
@@ -49,6 +50,7 @@ jobs:
       run:
         shell: bash
     strategy:
+      max-parallel: 1
       matrix:
         system:
           - ubuntu-latest
@@ -61,6 +63,30 @@ jobs:
         uses: ./
         with:
           version: v0.15.1
+      - name: test CML specific version
+        run: |
+          if [ "$(cml --version 2>&1)" != '0.15.1' ]; then
+            exit 1
+          fi
+          echo OK
+  test-version-prefix:
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      max-parallel: 1
+      matrix:
+        system:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.system }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: run action with latest
+        uses: ./
+        with:
+          version: 0.15.1
       - name: test CML specific version
         run: |
           if [ "$(cml --version 2>&1)" != '0.15.1' ]; then

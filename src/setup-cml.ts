@@ -70,7 +70,7 @@ async function getCmlDownloadUrl(
     const response = await octokit.repos.getReleaseByTag({
       owner: 'iterative',
       repo: 'cml',
-      tag: version
+      tag: version.startsWith('v') ? version : `v${version}`
     });
     release = response.data;
   }

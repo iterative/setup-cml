@@ -53,7 +53,17 @@ steps:
   - uses: actions/checkout@v3
   - uses: iterative/setup-cml@v2
     with:
-      version: '0.18.1'
+      version: 'v0.18.1'
+```
+
+Without vega tools
+```yaml
+steps:
+  - uses: actions/checkout@v3
+  - uses: iterative/setup-cml@v2
+    with:
+      version: 'v0.20.0'
+      vega: false
 ```
 
 ## Inputs
@@ -93,3 +103,11 @@ When using the `cml runner launch` command a [PAT is required](https://cml.dev/d
 ### CML functions
 
 CML provides several helper functions. See [the docs](https://cml.dev/doc).
+
+## Contributing
+
+To get started after cloning the repo, run `npm ci` (clean-install).
+Before pushing changes or opening a PR run `npm run format && npm run lint` to
+ensure that the code is formatted and linted.
+
+run `npm run build` to compile the action.

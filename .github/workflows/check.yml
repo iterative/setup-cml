@@ -13,7 +13,7 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - run: |
           npm ci
           npm run format
@@ -33,7 +33,7 @@ jobs:
           - windows-latest
     runs-on: ${{ matrix.system }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: run action with latest
         uses: ./
       - name: test
@@ -58,7 +58,7 @@ jobs:
           - windows-latest
     runs-on: ${{ matrix.system }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: run action with latest
         uses: ./
         with:
@@ -82,7 +82,7 @@ jobs:
           - windows-latest
     runs-on: ${{ matrix.system }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: run action with latest
         uses: ./
         with:

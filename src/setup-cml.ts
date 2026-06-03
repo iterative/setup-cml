@@ -34,7 +34,7 @@ async function run() {
     }
     if (vega) {
       try {
-        exec('npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5');
+        exec('npm install --global canvas@3 vega@6 vega-cli@6 vega-lite@6');
       } catch (error: any) {
         core.warning('Failed to intall vega tools');
       }

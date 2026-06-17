@@ -1,4 +1,4 @@
-name: Check CML GitHub Action 
+name: Check CML GitHub Action
 on:
   schedule:
     - cron: 0 0 * * *

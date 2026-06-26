@@ -54,7 +54,7 @@ async function getCmlDownloadUrl(
   assetName: string
 ): Promise<CMLDownloadResponse> {
   const octokit = new Octokit({
-    token: process.env.GITHUB_TOKEN,
+    auth: process.env.GITHUB_TOKEN,
     request: {
       fetch: fetch
     }

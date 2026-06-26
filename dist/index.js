@@ -14909,7 +14909,7 @@ function run() {
                     (0, exec_1.exec)('npm install --global canvas@3 vega@6 vega-cli@6 vega-lite@6');
                 }
                 catch (error) {
-                    core.warning('Failed to intall vega tools');
+                    core.warning('Failed to install vega tools');
                 }
             }
         }

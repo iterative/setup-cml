@@ -36,9 +36,15 @@ jobs:
       - uses: actions/checkout@v6
       - name: run action with latest
         uses: ./
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: test
         run: cml --version
+      # cml comment/check create need a write-scoped token, which PRs from forks
+      # don't get (read-only GITHUB_TOKEN). Run this step only where the token can
+      # write: same-repo PRs and the scheduled run on the default branch.
       - name: test CML
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -63,6 +69,8 @@ jobs:
         uses: ./
         with:
           version: v0.15.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: test CML specific version
         run: |
           if [ "$(cml --version 2>&1)" != '0.15.1' ]; then
@@ -87,6 +95,8 @@ jobs:
         uses: ./
         with:
           version: 0.15.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: test CML specific version
         run: |
           if [ "$(cml --version 2>&1)" != '0.15.1' ]; then

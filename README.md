@@ -75,6 +75,8 @@ The following inputs are supported.
   [most recent CML release](https://github.com/iterative/cml/releases).
 - `vega` - (optional) Whether to install vega dependencies. Defaults to `true`.
   runs command `npm install --global canvas@3 vega@6 vega-cli@6 vega-lite@6`
+- `token` - (optional) GitHub token used to look up the CML release to install.
+  Defaults to `${{ github.token }}`; authenticating avoids GitHub API rate limits.
 
 ## A complete example
 

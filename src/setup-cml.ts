@@ -34,7 +34,9 @@ async function run() {
     }
     if (vega) {
       try {
-        exec('npm install --global canvas@3 vega@6 vega-cli@6 vega-lite@6');
+        await exec(
+          'npm install --global canvas@3 vega@6 vega-cli@6 vega-lite@6'
+        );
       } catch (error: any) {
         core.warning('Failed to install vega tools');
       }
@@ -54,7 +56,7 @@ async function getCmlDownloadUrl(
   assetName: string
 ): Promise<CMLDownloadResponse> {
   const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN,
+    auth: core.getInput('token') || process.env.GITHUB_TOKEN,
     request: {
       fetch: fetch
     }

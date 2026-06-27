@@ -10,8 +10,12 @@ inputs:
     description: Whether to install Vega tools
     default: 'true'
     required: false
+  token:
+    description: GitHub token used to look up CML releases (avoids API rate limits).
+    default: ${{ github.token }}
+    required: false
 runs:
-  using: node16
+  using: node24
   main: dist/index.js
 branding:
   icon: terminal

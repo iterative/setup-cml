@@ -14906,10 +14906,10 @@ function run() {
             }
             if (vega) {
                 try {
-                    (0, exec_1.exec)('npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5');
+                    yield (0, exec_1.exec)('npm install --global canvas@3 vega@6 vega-cli@6 vega-lite@6');
                 }
                 catch (error) {
-                    core.warning('Failed to intall vega tools');
+                    core.warning('Failed to install vega tools');
                 }
             }
         }
@@ -14921,7 +14921,7 @@ function run() {
 function getCmlDownloadUrl(version, assetName) {
     return __awaiter(this, void 0, void 0, function* () {
         const octokit = new rest_1.Octokit({
-            token: process.env.GITHUB_TOKEN,
+            auth: core.getInput('token') || process.env.GITHUB_TOKEN,
             request: {
                 fetch: node_fetch_1.default
             }

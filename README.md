@@ -30,7 +30,7 @@ Note that CML does not include DVC and its dependencies (see the
 ## Note on v2
 
 `v1` of setup-cml was a wrapper around a set of npm installs. `v2` installs CML from its
-pre-packaged binaries. Then attempts to run `npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5`
+pre-packaged binaries. Then attempts to run `npm install --global canvas@3 vega@6 vega-cli@6 vega-lite@6`
 if you do not wish to install these tools pass `vega: false` to the action.
 
 link to [`v1`](https://github.com/iterative/setup-cml/tree/v1)
@@ -74,7 +74,9 @@ The following inputs are supported.
   to `latest` for the
   [most recent CML release](https://github.com/iterative/cml/releases).
 - `vega` - (optional) Whether to install vega dependencies. Defaults to `true`.
-  runs command `npm install --global canvas@2 vega@5 vega-cli@5 vega-lite@5`
+  runs command `npm install --global canvas@3 vega@6 vega-cli@6 vega-lite@6`
+- `token` - (optional) GitHub token used to look up the CML release to install.
+  Defaults to `${{ github.token }}`; authenticating avoids GitHub API rate limits.
 
 ## A complete example
 
